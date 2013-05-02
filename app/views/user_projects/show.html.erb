@@ -1,0 +1,143 @@
+
+
+<div class='row-fluid'>
+  <div class='span8'>
+    <div class='row-fluid' style='min-height: 150px;'>
+      <legend>
+        <h1>
+          <%= @project.title %>
+
+        <small>
+          by <%= link_to @project.user.screen_name, user_path(@project.user) %>
+          <% if signed_in? && @project.user == current_user %>
+            <%= link_to "edit", edit_user_project_path(@project.user, @project), class: "btn"%>
+          <% end %>
+        </small>
+        </h1>
+      </legend>
+      <%= @project.summary %>
+
+      <% if user_signed_in? && @project.user != current_user %>
+      <div class="span3">
+        <div class="well relative" style='padding: 8px;'>
+          <% if @project.follower_ids.include?(current_user.id) %>
+            <a href='<%= user_project_path(@project.user, @project) %>/unfollow'>
+              <span class="triangle-button blue"><i class="icon-plus"></i></span>
+              <i class='icon-github-alt'></i> unfollow
+            </a>
+          <% else %>
+            <a href='<%= user_project_path(@project.user, @project) %>/follow'>
+              <span class="triangle-button blue"><i class="icon-plus"></i></span>
+              <i class='icon-github-alt'></i> follow
+            </a>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      <div style='height: 25px'></div>
+      <legend>
+        <small>Description</small>
+      </legend>
+      <%= @project.description %>
+      <div style='height: 35px'></div>
+    </div>
+    <div class='box'>
+      <div class="box-header">
+        <span class="title"><i class="icon-th-list"></i> Gallery</span>
+      </div>
+      <div class="box-content padded">
+        <% @project.images.each do |image| %>
+          <div class='thumbnail span3'>
+            <a href="<%= image.url + filepicker_view %>">
+              <img class='img-loading' data-src='<%= image.url + filepicker_project_view(300, 200) %>' width='300px' height='200px' src='/assets/ie-spacer.gif'>
+            </a>
+          </div>
+        <% end %>
+      </div>
+      <div class='clearfix'></div>
+      <br>
+    </div>
+    <div class='box'>
+      <div class="box-header">
+        <span class="title"><i class="icon-th-list"></i> Updates</span>
+      </div>
+      <div class="box-content padded">
+      </div>
+    </div>
+  </div>
+  <div class='span4'>
+    <div class="box">
+      <div class="box-header">
+        <span class="title"><i class="icon-th-list"></i> Followers</span>
+      </div>
+      <div class="box-content padded">
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-header">
+        <span class="title"><i class="icon-th-list"></i> Q&A</span>
+      </div>
+      <div class="box-content padded">
+        <ul>
+          <li>Why is aaron so shit?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-header">
+        <span class="title"><i class="icon-th-list"></i> Statistics</span>
+      </div>
+      <div class="box-content padded">
+        <div class="row-fluid">
+          <div class="span12 separate-sections" style="margin-top: 5px;">
+            <div class="row-fluid">
+              <div class="span12">
+                <div class="dashboard-stats">
+                  <ul class="inline">
+                    <li class="glyph"><i class="icon-bolt icon-2x"></i></li>
+                    <li class="count">
+                      <%= @stat.nil? ? "N/A" : @stat.visitors %>
+
+                    </li>
+                  </ul>
+                  <!-- <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
+                  <div class="stats-label">Total Visits</div>
+                </div>
+              </div>
+              <br>
+              <div class="row-fluid" style="margin-top: 60px;">
+              <div class="span6">
+                <div class="dashboard-stats small">
+                  <ul class="inline">
+                    <li class="glyph"><i class="icon-user"></i></li>
+                    <li class="count"><%= @stat.nil? ? "N/A" : @stat.new_visits %></li>
+                  </ul>
+                  <!-- <div class="progress progress-blue"><div class="bar tip" title="65%" data-percent="65"></div></div> -->
+                  <div class="stats-label">New Visitors</div>
+                </div>
+              </div>
+
+              <div class="span6">
+                <div class="dashboard-stats small">
+                  <ul class="inline">
+                    <li class="glyph"><i class="icon-eye-open"></i></li>
+                    <li class="count"><%= @stat.nil? ? "N/A" : @stat.pageviews %></li>
+                  </ul>
+                <!--   <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
+                  <div class="stats-label">Page Views</div>
+                </div>
+              </div>
+            </div>
+            </div>
+
+          </div>
+        </div>
+        <div class='row-fluid'>
+          <small class='pull-right'>
+          last updated: <%= @stat.nil? ? "N/A" : time_ago_in_words(@stat.updated_at) + " ago" %>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

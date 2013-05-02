@@ -1,0 +1,45 @@
+#3rd party links
+#-linkedin
+#-github
+-facebook - still not working
+#-twitter
+
+#Updating messaging system for message counts
+
+Messaging system
+-fetches every so often, shows number everywhere
+
+User follow system
+-Email visible only to people you follow ?? not sure
+#-Follow other people
+
+#Project follow system
+#-Follow other people's projects
+
+Project updates system
+-Describe changes to the project
+
+Project question system
+-Ask questions about any project
+-Auto follows a project
+
+Project can have collaborators - only followers can collaborate
+
+Notifications
+-user updates
+-project updates
+
+Possibly private fields ?? not sure
+
+#Import profile from linkedin for first timers (fill in headline summary name)
+
+Import project from github for everyone, ignore projects already linked
+
+#Github panel for project analytics - with refresh button
+
+Possibly other panels if appropriate
+
+API to retrieve users data
+OAuth or not? Probably not, can just return .json for anyone
+
+upload image and change order results in two images - LOL WTF

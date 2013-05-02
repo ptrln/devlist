@@ -1,0 +1,15 @@
+<p>
+  <div class='row-fluid'>
+    <div class='span1'>
+    </div>
+    <div class='span1'>
+      <%= verifiedContactIcon(contact.t).html_safe %>
+    </div>
+    <div class='span7'>
+      <%= contact.info %>
+    </div>
+    <div class='span2'>
+      <a data-id='<%= contact.id %>' class="btn btn-danger btn-mini verified-contacts-delete-btn" href="#"><i class="icon-trash"></i> Delete</a>
+    </div>
+  </div>
+</p>

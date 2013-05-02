@@ -1,0 +1,90 @@
+
+<html>
+<head>
+  <title>DevList</title>
+  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-40518208-1', 'devlist.net');
+    ga('send', 'pageview');
+  </script>
+</head>
+<body>
+    <%= render :partial => "layouts/top_nav_bar" %>
+    <% if notice %>
+    <script>
+      Growl.success({title: 'Success', text: '<%= notice %>'});
+    </script>
+    <% end %>
+    <% if flash[:error] %>
+      Growl.error({title: 'Error', text: '<%= flash[:error] %>'});
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-error">
+        <%= alert %>
+      </div>
+    <% end %>
+    <div class="container-fluid padded">
+      <div class='row-fluid'>
+        <div class='span10 offset1'>
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <!-- Breadcrumb line -->
+            </div>
+          </div>
+
+          <div class="container-fluid">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+<script>
+  window.default_thumb = '<%= image_path "default_user_thumb.png" %>';
+  <% if user_signed_in? %>
+    window.current_user = { 
+      id: <%= current_user.id %>, 
+      screen_name: "<%= current_user.screen_name %>",
+      num_unread_messages: <%= num_unread_messages %>,
+      thumbnail: <%= current_user.photo.nil? ? "null" : "'#{current_user.photo.url}'".html_safe %>
+    };
+    window.filepicker_view_query = '<%= filepicker_view %>';
+    window.filepicker_thumbnail = '<%= filepicker_crop_view(30, 30) %>';
+  <% end %>
+  $(function(){
+    var tokenValue = $("meta[name='csrf-token']").attr('content');
+    $.ajaxSetup({
+      headers: {'X-CSRF-Token': tokenValue}
+    });
+    $(function(){
+      $('.thumbnail a').touchTouch();
+    });
+    $('.img-loading').each(function(index, el){
+      var $img = $(el);
+      var img = new Image();
+      img.onload = function() {
+        $img.removeClass('img-loading');
+        $img.attr('src', img.src);
+      };
+      img.src = $img.attr('data-src');
+    });
+  });
+</script>
+
+
+</html>

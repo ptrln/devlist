@@ -1,0 +1,28 @@
+<div class='row-fluid'>
+  <div class='span3' id='message-chains-list'>
+    loading...
+  </div>
+
+  <div class='span9'>
+    <div id='message-list'>loading...
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    var messageChains = <%= json_escape @chains.to_json(include: [:messages]).html_safe %>;
+    window.user_thumbnails = <%= json_escape @thumbs.to_json.html_safe %>;
+    window.MSG.initialize(
+      $("#message-chains-list"), 
+      $("#message-list"), 
+      $("#new-message-form"),
+      messageChains
+    );
+  });
+</script>
+
+<script> 
+
+  
+</script>

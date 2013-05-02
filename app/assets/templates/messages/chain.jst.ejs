@@ -1,0 +1,35 @@
+<div class="box">
+  <div class="box-header">
+    <span class="title">Message History</span>
+    <ul class="box-toolbar">
+      <li>
+        <span class="label label-green">???
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="box-content scrollable" style="height: 500px; overflow-y: auto">
+    <% if (chain.length > 0) { %>
+      <% chain.each(function(c){ %>
+        <div class='message-chain' data-to='<%= c.other() %>'>
+          <div class="box-section news">
+            <div class="avatar">
+              <img src="<%= user_thumbnails[c.other()] ? (user_thumbnails[c.other()] + filepicker_thumbnail) : default_thumb %>" class="avatar-small" %>
+            </div>
+            <div class="news-time">
+              <span><%= c.unreadCount() %></span>
+            </div>
+            <div class="news-content">
+              <div class="news-title"><%= c.other() %></div>
+              <div class="news-text">
+                <i><%= c.get('messages').last().get('body') %></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      no chains yet
+    <% } %>
+  </div>
+</div>

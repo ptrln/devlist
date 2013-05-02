@@ -1,0 +1,16 @@
+<form>
+    <% if (to) { %>
+      <input type='text' id='new-message-screen-name' value='<%= to %>' style='display: none;'>
+    <% } else { %>
+      <label>
+        user:
+        <input type='text' id='new-message-screen-name' placeholder='screen name'>
+      </label>
+    <% } %>
+
+  <div>
+    <textarea id='new-message-body' placeholder="Enter your message here..." class='span11'></textarea>
+    
+    <button class="btn btn-blue float-right">Send</button>
+  </div>
+</form>

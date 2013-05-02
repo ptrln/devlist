@@ -1,0 +1,1 @@
+RESERVED_WORDS = YAML.load_file("#{Rails.root}/config/reserved_words.yml")

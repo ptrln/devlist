@@ -1,0 +1,66 @@
+<div class="box">
+  <div class="box-header relative">
+    <span class="title">Messages</span>
+    <span class="triangle-button red close-message-btn"><i class="icon-remove"></i></span>
+  </div>
+  <div class="box-content" id='message-scrollable' style='height: 500px; overflow: auto;'>
+    <ul class="chat-box">
+      <ul class="chat-box">
+      <% var lastRec = null %>
+      <% if (messages && messages.length > 0) { %>
+        <% messages.each(function(msg){ %>
+          <% if (msg.get('from_id') === window.current_user.id) { %>
+            <li class="arrow-box-right">
+            <div class="avatar">
+              <img src='<%= current_user.thumbnail ? (current_user.thumbnail + filepicker_thumbnail) : default_thumb %>' class='avatar-small'>
+            </div>
+          <% } else { %>
+            <li class="arrow-box-left">
+            <div class="avatar">
+              <img src='<%= user_thumbnails[you] ? (user_thumbnails[you] + filepicker_thumbnail) : default_thumb %>' class='avatar-small'>
+            </div>
+          <% } %>
+            
+            <div class="info">
+              <span class="name">
+                <strong>
+                <%= 
+                  (function(){if (msg.get('from_id') === window.current_user.id) { 
+                    return me;
+                  } else {
+                    lastRec = msg.get('created_at');
+                    return you;
+                  }})()
+                %>
+                </strong> 
+                <% if (!msg.get('is_read')) { %>
+                  <span class="badge badge-blue">unread</span>
+                <% } %>
+              </span>
+              <span class="time"><abbr class="timeago" title="<%= msg.get('created_at') %>"><%= msg.get('created_at') %></abbr></span>
+            </div>
+            <%= msg.escape('body') %>
+          </li>
+          <li class="divider"></li>
+        <% }) %>
+      <% } %>
+      </ul>
+
+    </ul>
+    <br>
+    <% if (messages && messages.length > 0) { %>
+      <% if (lastRec) { %>
+        <p class="note text-center">Last message received <abbr class="timeago" title="<%= lastRec %>"><%= lastRec %></abbr></p>
+      <% } else { %>
+        <p class="note text-center">No messages received</p>
+      <% } %>
+    <% } else { %>
+      <p class="note text-center">No messages yet</p>
+    <% } %>
+  <hr class="divider">
+  </div>
+  <div class="box-footer flat padded">
+    <!-- chat send message module. you can use it with or without a form/submit button or just a link -->
+    <span id='message-list-form'></span>
+  </div>
+</div>

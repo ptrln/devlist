@@ -1,0 +1,123 @@
+<% 
+  if @project.id.nil? 
+    form = [@project, class: "fill-up"] 
+  else
+    form = [[current_user, @project], url: user_project_path(current_user, @project), class: "fill-up"] 
+  end
+%>
+
+<%= form_for(*form) do |pf| %>
+  <div class="row-fluid">
+    <div class="span6">
+      <ul class="padded separate-sections">
+
+        <li class="input">
+          <%= pf.label :title %>
+          <%= pf.text_field :title, class: "span12" %>
+        </li>
+
+        <li class="input">
+          <%= pf.label :summary %>
+          <%= pf.text_field :summary, class: "span12" %>
+        </li>
+
+        <li class="input">
+          <%= pf.label :description %>
+          <%= pf.text_area :description, rows: 5, class: "span12" %>
+        </li>
+
+        <li class="input">
+          <%= pf.label :technologies %>
+          <%= pf.text_area :technologies, id: "technologies" %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="span6">
+
+      <ul class="padded separate-sections">
+        <li class='input clearfix'>
+          <label>Images</label>
+          <div id="projectImageDropPane" class='fileDropPane span5 clearfix'>Drop images here</div>
+        </li>
+        <li class='input'>
+          <label>Existing Images</label>
+          <ul id='projectImageEditGallery' style='list-style-type: none; margin: 0; padding: 0;'>
+            <% count = 0 %>
+            <% @project.images.each do |image| %>
+              <li style='float: left;'>
+                <div class='thumbnail'>
+                  <img src='<%= image.url %>/convert<%= filepicker_view %>&w=100&h=100&fit=crop'>
+                </div>
+                <input type='hidden' name='user_project[images_attributes][<%= count %>][url]' value='<%= image.url %>'>
+                <input type='hidden' name='user_project[images_attributes][<%= count %>][ordering]' value='<%= count %>' class='project-image-ordering'>
+                <input type='hidden' name='user_project[images_attributes][<%= count %>][id]' value='<%= image.id %>'>
+              </li>
+              <% count += 1 %>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= pf.submit class: 'btn btn-blue' %>
+    <%= link_to "Cancel", :back, class:"btn btn-default" %>
+  </div>
+<% end %>
+
+
+<script>
+  $(function(){
+    $('#technologies').tagsInput({
+      'defaultText':'add a technology',
+      'minChars' : 1        
+    });
+
+    var projectId = <%= @project.id.nil? ? 'null': @project.id %>;
+
+    var refreshOrder = function() {
+      var order = 0;
+      $(".project-image-ordering").each(function(index, elem){
+        $(elem).val(order++);
+      });
+     };
+
+    $("#projectImageEditGallery").sortable({
+      update: refreshOrder
+    });
+
+    FilepickerImageUpload.initialize(
+      null,
+      $("#projectImageDropPane"),
+      $("#projectImageEditGallery"),
+      'AdLaitW2LTVWJIJTgtAGRz',
+      '<%= @policy %>',
+      '<%= @signature %>',
+      true,
+      function(img, existingCount) {
+        var imgHTML = JST["project/image_upload"]({
+          img: img,
+          key: window.filepicker_view_query
+        })
+
+        $.post(
+          "/project_images.json",
+          {
+            project_image: {
+              project_id: projectId,
+              url: img.url,
+              ordering: existingCount
+            }
+          },
+          function(response) {
+            $(imgHTML).find(".upload-image-id").val(response.id);
+          }
+        );
+
+        return imgHTML;
+      },
+      refreshOrder
+    );
+  })
+</script>
