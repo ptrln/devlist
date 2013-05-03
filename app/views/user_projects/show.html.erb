@@ -10,7 +10,7 @@
         <small>
           by <%= link_to @project.user.screen_name, user_path(@project.user) %>
           <% if signed_in? && @project.user == current_user %>
-            <%= link_to "edit", edit_user_project_path(@project.user, @project), class: "btn"%>
+            <%= link_to "edit", edit_user_project_path(@project.user, @project), class: "btn btn-default"%>
           <% end %>
         </small>
         </h1>
@@ -39,6 +39,13 @@
         <small>Description</small>
       </legend>
       <%= @project.description %>
+      <div style='height: 25px'></div>
+      <legend>
+        <small>Technologies</small>
+      </legend>
+      <% @project.technologies.split(',').each do |tech |%>
+        <span class="label label-blue"><%= tech %></span>
+      <% end %>
       <div style='height: 35px'></div>
     </div>
     <div class='box'>
@@ -46,11 +53,23 @@
         <span class="title"><i class="icon-th-list"></i> Gallery</span>
       </div>
       <div class="box-content padded">
+        <% image_count = 0 %>
         <% @project.images.each do |image| %>
+          <% if image_count % 4 == 0 %>
+            <div class="row-fluid">
+          <% end %>
           <div class='thumbnail span3'>
             <a href="<%= image.url + filepicker_view %>">
               <img class='img-loading' data-src='<%= image.url + filepicker_project_view(300, 200) %>' width='300px' height='200px' src='/assets/ie-spacer.gif'>
             </a>
+          </div>
+          <% if image_count % 4 == 3 %>
+            </div>
+            <br>
+          <% end %>
+          <% image_count +=1 %>
+        <% end %>
+        <% if image_count % 4 != 3 %>
           </div>
         <% end %>
       </div>
@@ -79,7 +98,6 @@
       </div>
       <div class="box-content padded">
         <ul>
-          <li>Why is aaron so shit?</li>
         </ul>
       </div>
     </div>
