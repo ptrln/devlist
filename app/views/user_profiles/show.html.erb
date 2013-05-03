@@ -39,12 +39,12 @@
             <% if @user.follower_ids.include?(current_user.id) %>
               <a href='/<%= @user.screen_name %>/unfollow'>
                 <span class="triangle-button blue"><i class="icon-plus"></i></span>
-                <i class='icon-github-alt'></i> unfollow
+                <i class='icon-star-empty'></i> unfollow
               </a>
             <% else %>
               <a href='/<%= @user.screen_name %>/follow'>
                 <span class="triangle-button blue"><i class="icon-plus"></i></span>
-                <i class='icon-github-alt'></i> follow
+                <i class='icon-star'></i> follow
               </a>
             <% end %>
           </div>
