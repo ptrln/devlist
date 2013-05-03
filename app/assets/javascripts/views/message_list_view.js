@@ -24,7 +24,7 @@ MSG.Views.MessageListView = Backbone.View.extend({
       console.log(msgBox.prop("scrollHeight"));
       msgBox.animate({ scrollTop: msgBox.prop("scrollHeight") - msgBox.height() }, 1000);
     }.bind(this), 100);
-    this.$el.find("abbr.timeago").timeago();
+    this.$el.find("time.timeago").timeago();
     this.model.read();
     return this;
   },
@@ -45,7 +45,7 @@ MSG.Views.MessageListView = Backbone.View.extend({
       console.log(msgBox.prop("scrollHeight"));
       msgBox.animate({ scrollTop: msgBox.prop("scrollHeight") }, 1000);
     }.bind(this), 100);
-    this.$el.find("abbr.timeago").timeago();
+    this.$el.find("time.timeago").timeago();
     this.model.read();
     return this;
   },

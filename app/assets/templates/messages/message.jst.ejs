@@ -37,7 +37,7 @@
                   <span class="badge badge-blue">unread</span>
                 <% } %>
               </span>
-              <span class="time"><abbr class="timeago" title="<%= msg.get('created_at') %>"><%= msg.get('created_at') %></abbr></span>
+              <span class="time"><time class="timeago" datetime="<%= msg.get('created_at') %>"><%= msg.get('created_at') %></time></span>
             </div>
             <%= msg.escape('body') %>
           </li>

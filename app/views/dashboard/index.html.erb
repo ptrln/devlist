@@ -30,7 +30,12 @@
                 </strong>
                 <% end %>
               </span>
-              <span class="time"><i class="icon-time"></i> 3 minutes ago</span>
+              <span class="time">
+                <i class="icon-time"></i>
+                <time class="timeago" datetime="<%= update.created_at.iso8601 %>">
+                  <%= update.created_at %>
+                </time>
+              </span>
             </div>
             <div class="content">
               <blockquote>
@@ -128,3 +133,10 @@
   </div>
 
 </div>
+
+<script>
+  $(function(){
+    $("abbr.timeago").timeago();
+    $("time.timeago").timeago();
+  });
+</script>
