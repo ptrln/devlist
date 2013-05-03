@@ -1,7 +1,7 @@
 
 <html>
 <head>
-  <title>DevList</title>
+  <title><%= (yield(:title).empty? ? "DevList - Developer Listing" : "#{yield(:title)} | DevList - Developer Listing") %></title>
   <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
   <meta charset="utf-8">

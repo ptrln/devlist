@@ -75,7 +75,6 @@
         <%= render :partial => "verified_contact", :locals => { :contact => contact } %>
       <% end %>
       </div>
-      
     </div>
 
     <h3> Contact</h3>
@@ -106,8 +105,11 @@
           </li>
         </div>
       <% end %>
+      
     </ul>
-
+    <div class='input span5 offset7'>
+      <a href='#' class='btn btn-default add-contact-btn'><i class='icon-plus'></i> add another contact</a> 
+    </div>
   </div>
 
 
@@ -148,6 +150,9 @@
         </div>
       <% end %>
     </ul>
+    <div class='input span5 offset7'>
+      <a href='#' class='btn btn-default add-skill-btn'><i class='icon-plus'></i> add another skill</a>     
+    </div>
   </div>
 </div>
 <div class="form-actions">
@@ -158,20 +163,41 @@
 <% end %>
 
 <script>
-  $(function(){
-    $(".ranged-slider-ui ").each(function(index, el){
-      $(el).slider({
-        range: "min",
-        min: 0,
-        max: 100,
-        step: 10,
-        value: $(el).attr('data-value'),
-        slide: function(event, ui) {
-          $(event.target).parent().prev().find("input").val(ui.value);
-          $(event.target).parent().prev().find("span").html(ui.value);
-        }
-      });
+  var bindSlider = function(index, el) {
+    $(el).removeClass('ranged-slider-ui');
+    $(el).slider({
+      range: "min",
+      min: 0,
+      max: 100,
+      step: 10,
+      value: $(el).attr('data-value'),
+      slide: function(event, ui) {
+        $(event.target).parent().prev().find("input").val(ui.value);
+        $(event.target).parent().prev().find("span").html(ui.value);
+      }
     });
+  }
+
+  $(function(){
+    $(".add-contact-btn").on('click', function(event) {
+      event.preventDefault();
+      $ul = $(event.target).parent().prev();
+      var render = JST['user/additional_contact']({
+        count: $ul.find("li").length
+      });
+      $ul.append(render);
+    });
+    $(".add-skill-btn").on('click', function(event) {
+      event.preventDefault();
+      $ul = $(event.target).parent().prev();
+      var render = JST['user/additional_skill']({
+        count: $ul.find("li").length
+      });
+      $ul.append(render);
+      $(".ranged-slider-ui").each(bindSlider);
+    });
+
+    $(".ranged-slider-ui").each(bindSlider);
     
     $('.verified-contacts-delete-btn').click(function(event){
       event.preventDefault();

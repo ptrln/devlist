@@ -3,10 +3,47 @@
   </div>
   <div class='span9'>
     <% if @updates %>
-    <pre>
-      <%= @updates.inspect %>
-    </pre>
+    <div class="row-fluid">
+      <div class="span12">
+        <ul class="chat-box timeline">
+          <% @updates.each do |update| %>
+          <li class="arrow-box-left gray">
+            <div class="avatar">
+              <%= image_tag notification_user_icon(update), class: "avatar-small" %>
+            </div>
+            <div class="info">
+              <span class="name">
+                <% if update.notifiable_type == "User" %>
+                <span class="label label-green">User</span> 
+                <strong class="indent">
+                  <%= update.notifiable.screen_name %>
+                </strong> 
+                has updated their profile.
+                <% elsif update.notifiable_type == "UserProject" %>
+                <span class="label label-green">Project</span> 
+                <strong class="indent">
+                  <%= update.notifiable.user.screen_name %>
+                </strong> 
+                has updated this project:
+                <strong>
+                  <%= update.notifiable.title %>
+                </strong>
+                <% end %>
+              </span>
+              <span class="time"><i class="icon-time"></i> 3 minutes ago</span>
+            </div>
+            <div class="content">
+              <blockquote>
+                <%= update.message %>
+              </blockquote>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
     <% end %>
+
     <div class='conatiner'>
       <h1><i>some fancy dashboard is coming soon!</i></h1>
     </div>

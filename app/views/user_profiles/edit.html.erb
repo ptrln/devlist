@@ -1,3 +1,9 @@
+<% if @new_user %>
+  <% content_for :title, "New Profile" %>
+<% else %>
+  <% content_for :title, "Edit Profile" %>
+<% end %>
+
 <div class="row-fluid">
   <div class="span12">
     <div class="box">

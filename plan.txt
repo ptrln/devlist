@@ -1,7 +1,7 @@
 #3rd party links
 #-linkedin
 #-github
--facebook - still not working
+#-facebook
 #-twitter
 
 #Updating messaging system for message counts
@@ -45,7 +45,7 @@ OAuth or not? Probably not, can just return .json for anyone
 upload image and change order results in two images - LOL WTF
 
 TODO:
-different titles
+#different titles
 notification
 -reload every x seconds
 -notification dropdown
