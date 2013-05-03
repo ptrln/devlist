@@ -4,6 +4,7 @@
   <div class='span8'>
     <div class='row-fluid' style='min-height: 150px;'>
       <legend>
+        <div class='span10'>
         <h1>
           <%= @project.title %>
 
@@ -12,27 +13,29 @@
           <% if signed_in? && @project.user == current_user %>
             <%= link_to "edit", edit_user_project_path(@project.user, @project), class: "btn btn-default"%>
           <% end %>
-          <% if user_signed_in? && @project.user != current_user %>
-          <div class="span2">
-            <div class="well" style='padding: 8px;'>
-              <% if @project.follower_ids.include?(current_user.id) %>
-                <a href='<%= user_project_path(@project.user, @project) %>/unfollow'>
-                  <span class="triangle-button blue"><i class="icon-plus"></i></span>
-                  <i class='icon-star-empty'></i> unfollow
-                </a>
-              <% else %>
-                <a href='<%= user_project_path(@project.user, @project) %>/follow'>
-                  <span class="triangle-button blue"><i class="icon-plus"></i></span>
-                  <i class='icon-star'></i> follow
-                </a>
-              <% end %>
-            </div>
-          </div>
-          <br class='clearfix'>
-          <% end %>
-        </small>
+         </small>
         </h1>
+        </div>
       </legend>
+      <% if user_signed_in? && @project.user != current_user %>
+      <div class="span2">
+        <div class="well relative" style='padding: 8px;'>
+          <% if @project.follower_ids.include?(current_user.id) %>
+            <a href='<%= user_project_path(@project.user, @project) %>/unfollow'>
+              <span class="triangle-button blue"><i class="icon-plus"></i></span>
+              <i class='icon-github-alt'></i> unfollow
+            </a>
+          <% else %>
+            <a href='<%= user_project_path(@project.user, @project) %>/follow'>
+              <span class="triangle-button blue"><i class="icon-plus"></i></span>
+              <i class='icon-github-alt'></i> follow
+            </a>
+          <% end %>
+        </div>
+      </div>
+      <br class='clearfix'>
+      <% end %>
+       
       <%= @project.summary %>
       <div style='height: 25px'></div>
       <legend>
