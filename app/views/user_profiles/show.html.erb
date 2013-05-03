@@ -25,7 +25,7 @@
             <% end %>
           </div>
         </div>
-        <p><%= @user.profile.summary %></p>
+        <p><%= simple_format(@user.profile.summary) %></p>
 
       </div>
       <div class="box-content padded">

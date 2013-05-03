@@ -3,7 +3,7 @@ require 'net/http'
 class ProjectImage < ActiveRecord::Base
   attr_accessible :ordering, :project_id, :url
 
-  belongs_to :project
+  belongs_to :project, class_name: "UserProject"
 
   before_destroy :delete_filepicker_image
 

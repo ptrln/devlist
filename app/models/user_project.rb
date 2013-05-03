@@ -12,6 +12,8 @@ class UserProject < ActiveRecord::Base
     :inverse_of => :project, :dependent => :destroy
   accepts_nested_attributes_for :images, reject_if: :all_blank
 
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
+
   has_many :follows, :as => :followable
   has_many :followers, :through => :follows
 

@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
                   :contacts_attributes,
                   :follower_ids,
                   :following_user_ids,
-                  :following_project_ids
+                  :following_project_ids,
+                  :notification_time
 
   has_one :photo, :class_name => "UserPhoto", :dependent => :destroy
 
@@ -41,7 +42,9 @@ class User < ActiveRecord::Base
 
   has_many :verified_contacts, :class_name => "UserVerifiedContact", :inverse_of => :user, :dependent => :destroy
  
-  has_many :follows, :class_name => "Follow", :as => :followable, :dependent => :destroy
+  has_many :notifications, :as => :notifiable, :dependent => :destroy
+
+  has_many :follows, :as => :followable, :dependent => :destroy
   has_many :followers, :through => :follows
   has_many :following, :class_name => "Follow", foreign_key: "follower_id"
   has_many :following_users, :through => :following, :source =>  :followable, :source_type => 'User'

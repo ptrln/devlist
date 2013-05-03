@@ -53,6 +53,9 @@ module DevList
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
 
+    config.active_record.observers = :user_project_observer, :user_observer,
+        :project_image_observer, :user_photo_observer
+
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.paths << "app/assets/templates"
