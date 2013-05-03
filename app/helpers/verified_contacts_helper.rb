@@ -19,7 +19,7 @@ module VerifiedContactsHelper
     when "twitter"
       "https://twitter.com/#{contact.info}"
     when "facebook"
-      "https://facebook.com/"
+      contact.info
     when "linkedin"
       contact.info
     when "github"

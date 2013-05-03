@@ -59,9 +59,7 @@ class ExternalAuthController < ApplicationController
           :github_updated_at => info["updated_at"]
         });
       when "facebook"
-        render :json => request.env['omniauth.auth']
-        return
-        current_user.verified_contacts.create({t: "facebook", info: "", auth: request.env['omniauth.auth'].to_json})
+        current_user.verified_contacts.create({t: "facebook", info: request.env['omniauth.auth'].extra.raw_info.link, auth: request.env['omniauth.auth'].to_json})
       when "angellist"
         current_user.verified_contacts.create({t: "angellist", info: request.env['omniauth.auth'].info.angellist_url, auth: request.env['omniauth.auth'].to_json})
       end
