@@ -4,7 +4,7 @@ class UserProjectsController < ApplicationController
 
   before_filter :correct_path_for_project, except: [:new, :create]
   before_filter :authenticate_user!, except: [:show]
-  before_filter :authorized_user, except: [:show, :new, :create]
+  before_filter :authorized_user, except: [:show, :new, :create, :follow, :unfollow]
 
   def new
     @project = UserProject.new
