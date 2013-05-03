@@ -13,7 +13,7 @@
           <div class='span9'>
             <p><%= @user.profile.name %></p>
             <p><%= @user.email %></p>
-            <p><%= @user.profile.headline %></p>
+            <p><i><%= @user.profile.headline %></i></p>
           </div>
           <div class='span3'>
             <% if @user.photo %>
@@ -25,6 +25,9 @@
             <% end %>
           </div>
         </div>
+        <legend>
+          <small>Summary</small>
+        </legend>
         <p><%= simple_format(@user.profile.summary) %></p>
 
       </div>
