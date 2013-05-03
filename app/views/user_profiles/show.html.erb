@@ -28,8 +28,9 @@
         <p><%= simple_format(@user.profile.summary) %></p>
 
       </div>
+      <% if user_signed_in? && @user != current_user %>
       <div class="box-content padded">
-        <% if user_signed_in? && @user != current_user %>
+        
         <div class="span3">
           <div class="well relative" style='padding: 8px;'>
             <% if @user.follower_ids.include?(current_user.id) %>
@@ -45,9 +46,10 @@
             <% end %>
           </div>
         </div>
-        <% end %>
-
       </div>
+      <br style='clearfix'>
+      <br>
+      <% end %>
         
     </div>
     <div class="box">
