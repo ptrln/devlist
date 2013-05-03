@@ -2,9 +2,17 @@
   <div class='span3'>
   </div>
   <div class='span9'>
+    <% if @updates %>
     <pre>
       <%= @updates.inspect %>
     </pre>
+    <% end %>
+    <div class='conatiner'>
+      <h1><i>some fancy dashboard is coming soon!</i></h1>
+    </div>
+    <div class='conatiner'>
+      <h1><i>has <%= User.count %> users</i></h1>
+    </div>
     <div class='conatiner'>
       <h1><i>hello, world!</i></h1>
     </div>
