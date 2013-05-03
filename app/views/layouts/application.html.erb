@@ -32,7 +32,9 @@
     </script>
     <% end %>
     <% if flash[:error] %>
+    <script>
       Growl.error({title: 'Error', text: '<%= flash[:error] %>'});
+    </script>
     <% end %>
     <% if alert %>
       <div class="alert alert-error">
