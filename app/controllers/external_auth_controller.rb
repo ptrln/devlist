@@ -5,8 +5,13 @@ class ExternalAuthController < ApplicationController
     redirect_to "/auth/" + params[:provider]
   end
 
+  def fail
+    flash[:error] = "oAuth was not successful. Please try again."
+    redirect_to edit_profile_path
+  end
+
   def create
-    if user_signed_in?
+    if user_signed_in? && params['denied'].nil?
       case request.env['omniauth.auth'].provider
       when "twitter"
         current_user.verified_contacts.create({t: "twitter", info: request.env['omniauth.auth'].extra.raw_info.screen_name, auth: request.env['omniauth.auth'].to_json})

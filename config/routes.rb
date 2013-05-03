@@ -3,6 +3,7 @@ DevList::Application.routes.draw do
   root :to => "dashboard#index"
 
   match '/auth/:provider/callback', :to => 'external_auth#create'
+  match '/auth/failure', :to => 'external_auth#fail'
   get '/verify/:provider', :to => 'external_auth#new'
 
   devise_for :user, 

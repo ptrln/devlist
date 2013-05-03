@@ -43,3 +43,20 @@ API to retrieve users data
 OAuth or not? Probably not, can just return .json for anyone
 
 upload image and change order results in two images - LOL WTF
+
+TODO:
+different titles
+notification
+-reload every x seconds
+-notification dropdown
+-notification page for ppl without js
+message
+-message page for people without js
+better error displays.. not sure if this is even working
+useful things on dashboard.. user stats etc
+look at tumblr templates. think about how to implement that
+hideable stats
+possibly rearrange boxes - maybe through template
+better display for empty stuff
+jquery github for project?
+maybe modal for all github projects
