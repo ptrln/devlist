@@ -16,26 +16,24 @@
          </small>
         </h1>
         </div>
-      </legend>
-      <% if user_signed_in? && @project.user != current_user %>
-      <div class="span2">
-        <div class="well relative" style='padding: 8px;'>
-          <% if @project.follower_ids.include?(current_user.id) %>
-            <a href='<%= user_project_path(@project.user, @project) %>/unfollow'>
-              <span class="triangle-button blue"><i class="icon-plus"></i></span>
-              <i class='icon-star-empty'></i> unfollow
-            </a>
-          <% else %>
-            <a href='<%= user_project_path(@project.user, @project) %>/follow'>
-              <span class="triangle-button blue"><i class="icon-plus"></i></span>
-              <i class='icon-star'></i> follow
-            </a>
-          <% end %>
+        <% if user_signed_in? && @project.user != current_user %>
+        <div class="span2">
+          <div class="well relative" style='padding: 8px;'>
+            <% if @project.follower_ids.include?(current_user.id) %>
+              <a href='<%= user_project_path(@project.user, @project) %>/unfollow'>
+                <span class="triangle-button blue"><i class="icon-plus"></i></span>
+                <i class='icon-star-empty'></i> unfollow
+              </a>
+            <% else %>
+              <a href='<%= user_project_path(@project.user, @project) %>/follow'>
+                <span class="triangle-button blue"><i class="icon-plus"></i></span>
+                <i class='icon-star'></i> follow
+              </a>
+            <% end %>
+          </div>
         </div>
-      </div>
-      <br class='clearfix'>
-      <% end %>
-       
+        <% end %>
+      </legend> 
       <%= @project.summary %>
       <div style='height: 25px'></div>
       <legend>
