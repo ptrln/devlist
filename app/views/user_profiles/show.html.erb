@@ -33,8 +33,7 @@
       </div>
       <% if user_signed_in? && @user != current_user %>
       <div class="box-content padded">
-        
-        <div class="span3">
+        <div class="span3 pull-right">
           <div class="well relative" style='padding: 8px;'>
             <% if @user.follower_ids.include?(current_user.id) %>
               <a href='/<%= @user.screen_name %>/unfollow'>
