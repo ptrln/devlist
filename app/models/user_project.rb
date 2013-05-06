@@ -5,7 +5,9 @@ class UserProject < ActiveRecord::Base
                   :technologies, 
                   :title, 
                   :images_attributes,
-                  :follower_ids
+                  :follower_ids,
+                  :link,
+                  :source_link
 
   belongs_to :user
   has_many :images, class_name: "ProjectImage", foreign_key: "project_id", 

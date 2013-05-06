@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503001437) do
+ActiveRecord::Schema.define(:version => 20130506213601) do
 
   create_table "analyticals", :force => true do |t|
     t.string   "page_path",        :null => false
@@ -110,6 +110,15 @@ ActiveRecord::Schema.define(:version => 20130503001437) do
 
   add_index "notifications", ["notifiable_id", "notifiable_type"], :name => "index_notifications_on_notifiable_id_and_notifiable_type"
 
+  create_table "project_answers", :force => true do |t|
+    t.integer  "question_id", :null => false
+    t.string   "body",        :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "project_answers", ["question_id"], :name => "index_project_answers_on_question_id"
+
   create_table "project_images", :force => true do |t|
     t.string   "url",        :null => false
     t.integer  "ordering",   :null => false
@@ -119,6 +128,24 @@ ActiveRecord::Schema.define(:version => 20130503001437) do
   end
 
   add_index "project_images", ["project_id"], :name => "index_project_images_on_project_id"
+
+  create_table "project_questions", :force => true do |t|
+    t.integer  "project_id", :null => false
+    t.string   "body",       :null => false
+    t.integer  "asker_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "project_questions", ["asker_id"], :name => "index_project_questions_on_asker_id"
+  add_index "project_questions", ["project_id"], :name => "index_project_questions_on_project_id"
+
+  create_table "project_updates", :force => true do |t|
+    t.integer  "project_id", :null => false
+    t.string   "body",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "user_contacts", :force => true do |t|
     t.string   "t"
@@ -160,6 +187,8 @@ ActiveRecord::Schema.define(:version => 20130503001437) do
     t.string   "technologies"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.string   "link"
+    t.string   "source_link"
   end
 
   add_index "user_projects", ["user_id"], :name => "index_user_projects_on_user_id"

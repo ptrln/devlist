@@ -27,6 +27,11 @@
         </li>
 
         <li class="input">
+          <%= pf.label :creation_date %>
+          <%= pf.date_select :creation_date, class: "span12" %>
+        </li>
+
+        <li class="input">
           <%= pf.label :technologies %>
           <%= pf.text_area :technologies, id: "technologies" %>
         </li>
@@ -36,13 +41,15 @@
     <div class="span6">
 
       <ul class="padded separate-sections">
+        
+
         <li class='input clearfix'>
           <label>Images</label>
           <div id="projectImageDropPane" class='fileDropPane span5 clearfix'>Drop images here</div>
         </li>
-        <li class='input'>
+        <li class='input clearfix'>
           <label>Existing Images</label>
-          <ul id='projectImageEditGallery' style='list-style-type: none; margin: 0; padding: 0;'>
+          <ul id='projectImageEditGallery' class='clearfix' style='list-style-type: none; margin: 0; padding: 0;'>
             <% count = 0 %>
             <% @project.images.each do |image| %>
               <li style='float: left;'>
@@ -56,6 +63,17 @@
               <% count += 1 %>
             <% end %>
           </ul>
+        </li>
+        <br class='clearfix'>
+
+        <li class="input">
+          <%= pf.label :link %>
+          <%= pf.text_field :link, class: "span12" %>
+        </li>
+
+        <li class="input">
+          <%= pf.label :source_link %>
+          <%= pf.text_field :source_link, class: "span12" %>
         </li>
       </ul>
     </div>
