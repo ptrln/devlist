@@ -17,6 +17,7 @@ gem 'omniauth-github'
 gem 'omniauth-linkedin-oauth2'
 gem 'delayed_job_active_record'
 gem "github_api"
+gem 'jquery-ui-rails'
 
 gem 'garb', :git => 'git://github.com/Sija/garb.git'  # for google analytics
 

@@ -13,7 +13,7 @@
 //= require_tree ./views
 //= require_tree ../templates
 //= require vendor/timeago
-//= require vendor/jquery.ui.datepicker
+//= require jquery.ui.datepicker
 
 // require vendor/fullcalendar/fullcalendar
 //= require vendor/jquery_gritter
