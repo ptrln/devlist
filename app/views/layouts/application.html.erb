@@ -1,7 +1,7 @@
 
 <html>
 <head>
-  <title><%= (yield(:title).empty? ? "DevList - Developer Listing" : "#{yield(:title)} | DevList - Developer Listing") %></title>
+  <title><%= (yield(:title).empty? ? "DevList - Developer List" : "#{yield(:title)} | DevList - Developer List") %></title>
   <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
   <meta charset="utf-8">
@@ -44,17 +44,16 @@
     <div class="container-fluid padded">
       <div class='row-fluid'>
         <div class='span10 offset1'>
-          <div class="container-fluid">
-            <div class="row-fluid">
-              <!-- Breadcrumb line -->
-            </div>
+          <div class="container-fluid" style='min-height: 500px;'>
+            <%= yield %>
           </div>
 
-          <div class="container-fluid">
-            <%= yield %>
+          <div class='row-fluid'>
+            <small>DevList © 2013 - English</small>
           </div>
         </div>
       </div>
+      
     </div>
 </body>
 <script>

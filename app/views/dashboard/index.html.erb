@@ -1,135 +1,106 @@
 <div class='row-fluid'>
   <div class='span3'>
-  </div>
-  <div class='span9'>
-    <% if @updates %>
-    <div class="row-fluid">
-      <div class="span12">
-        <ul class="chat-box timeline">
-          <% @updates.each do |update| %>
-          <li class="arrow-box-left gray">
-            <div class="avatar">
-              <%= image_tag notification_user_icon(update), class: "avatar-small" %>
-            </div>
-            <div class="info">
-              <span class="name">
-                <% if update.notifiable_type == "User" %>
-                <span class="label label-green">User</span> 
-                <strong class="indent">
-                  <%= update.notifiable.screen_name %>
-                </strong> 
-                has updated their profile.
-                <% elsif update.notifiable_type == "UserProject" %>
-                <span class="label label-green">Project</span> 
-                <strong class="indent">
-                  <%= update.notifiable.user.screen_name %>
-                </strong> 
-                has updated this project:
-                <strong>
-                  <%= update.notifiable.title %>
-                </strong>
-                <% end %>
-              </span>
-              <span class="time">
-                <i class="icon-time"></i>
-                <time class="timeago" datetime="<%= update.created_at.iso8601 %>">
-                  <%= update.created_at %>
-                </time>
-              </span>
-            </div>
-            <div class="content">
-              <blockquote>
-                <%= update.message %>
-              </blockquote>
-            </div>
-          </li>
-          <% end %>
-        </ul>
+    <div class="primary-sidebar">
+      <!-- Main nav -->
+
+      <div class="hidden-tablet hidden-phone">
+        <div class="text-center">
+          <h1>Developer List</h1>
+        </div>
+
+        <hr class="divider" style="margin-top: 60px">
+
+        <div class="sparkline-box side">
+
+          <div class="sparkline-row">
+            <h4 class="gray"><span>Users</span> <%= User.count %></h4>
+            <!-- <div class="sparkline big" data-color="gray">12</div> -->
+          </div>
+
+          <hr class="divider">
+          <div class="sparkline-row">
+            <h4 class="dark-green"><span>Visitors</span><%= @visitors %></h4>
+            <!-- <div class="sparkline big" data-color="darkGreen">12</div> -->
+          </div>
+
+          <hr class="divider">
+          <div class="sparkline-row">
+            <h4 class="blue"><span>Pageviews</span><%= @pageviews %></h4>
+            <!-- <div class="sparkline big" data-color="blue">12</div> -->
+          </div>
+
+          <hr class="divider">
+        </div>
       </div>
-    </div>
-    <% end %>
 
-    <div class='conatiner'>
-      <h1><i>some fancy dashboard is coming soon!</i></h1>
-    </div>
-    <div class='conatiner'>
-      <h1><i>has <%= User.count %> users</i></h1>
-    </div>
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
+
     </div>
 
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
+
+
+  </div>
+  <div class="span9">
+    <div class='row-fluid'>
+      <legend>
+        <h3>Updates</h3>
+      </legend>
+      
+        <div class="row-fluid">
+          <div class="span12">
+            <% if @updates.length > 0 %>
+            <ul class="chat-box timeline">
+              <% @updates.each do |update| %>
+              <li class="arrow-box-left gray">
+                <div class="avatar">
+                  <%= image_tag notification_user_icon(update), class: "avatar-small" %>
+                </div>
+                <div class="info">
+                  <span class="name">
+                    <% if update.notifiable_type == "User" %>
+                    <span class="label label-green">User</span> 
+                    <strong class="indent">
+                      <%= link_to update.notifiable.screen_name, user_path(update.notifiable) %>
+                    </strong> 
+                    has updated their profile.
+                    <% elsif update.notifiable_type == "UserProject" %>
+                    <span class="label label-green">Project</span> 
+                    <strong class="indent">
+                      <%= link_to update.notifiable.user.screen_name, user_path(update.notifiable.user) %>
+                    </strong> 
+                    has updated this project:
+                    <strong>
+                      <%= link_to update.notifiable.title, user_project_path(update.notifiable.user, update.notifiable) %>
+                    </strong>
+                    <% end %>
+                    <% if update.is_unread == 1 %>
+                      <span class='badge badge-blue indent'>new!</span>
+                    <% end %>
+                  </span>
+                  
+                  <span class="time">
+                    <i class="icon-time"></i>
+                    <time class="timeago" datetime="<%= update.created_at.iso8601 %>">
+                      <%= update.created_at %>
+                    </time>
+                  </span>
+                </div>
+                <div class="content">
+                  <blockquote>
+                    <%= update.message %>
+                  </blockquote>
+                </div>
+              </li>
+              <% end %>
+            </ul>
+            <% else %>
+              no updates yet...
+
+            <% end %>
+          </div>
+        </div>
+        
     </div>
 
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
-
-    <div class='conatiner'>
-      <h1><i>hello, world!</i></h1>
-    </div>
   </div>
 
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130501174022) do
+ActiveRecord::Schema.define(:version => 20130503001437) do
 
   create_table "analyticals", :force => true do |t|
     t.string   "page_path",        :null => false
@@ -99,6 +99,16 @@ ActiveRecord::Schema.define(:version => 20130501174022) do
   add_index "messages", ["chain_id"], :name => "index_messages_on_chain_id"
   add_index "messages", ["from_id"], :name => "index_messages_on_from_id"
   add_index "messages", ["to_id"], :name => "index_messages_on_to_id"
+
+  create_table "notifications", :force => true do |t|
+    t.string   "notifiable_type", :null => false
+    t.integer  "notifiable_id",   :null => false
+    t.string   "message",         :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "notifications", ["notifiable_id", "notifiable_type"], :name => "index_notifications_on_notifiable_id_and_notifiable_type"
 
   create_table "project_images", :force => true do |t|
     t.string   "url",        :null => false
@@ -196,6 +206,7 @@ ActiveRecord::Schema.define(:version => 20130501174022) do
     t.datetime "locked_at"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
+    t.datetime "notification_time"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
