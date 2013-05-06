@@ -1,5 +1,6 @@
 class ExceptionsController < ActionController::Base
-  
+  layout 'application'
+
   #from http://geekmonkey.org/articles/29-exception-applications-in-rails-3-2
   def show
     @exception       = env['action_dispatch.exception']
