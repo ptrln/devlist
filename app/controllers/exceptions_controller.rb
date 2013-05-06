@@ -8,7 +8,7 @@ class ExceptionsController < ActionController::Base
     @rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[@exception.class.name]
 
     respond_to do |format|
-      format.html { render :show, status: @status_code, layout: !request.xhr? }
+      format.html { render (@status_code == 404 ? :show404 : :show), status: @status_code, layout: !request.xhr? }
       format.xml  { render xml: details, root: "error", status: @status_code }
       format.json { render json: {error: details}, status: @status_code }
     end
