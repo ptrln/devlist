@@ -4,3 +4,4 @@ class ProjectAnswer < ActiveRecord::Base
   belongs_to :project, class_name: "UserProject"
 
   validates :body, :project, presence: true
+end
