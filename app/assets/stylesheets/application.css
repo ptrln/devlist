@@ -51,5 +51,6 @@
 *= require responsive979
 *= require responsive768
 *= require responsive480
+*= require jquery-ui-1.10.3.custom
 *= require dashboard
 */

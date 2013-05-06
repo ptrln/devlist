@@ -28,7 +28,7 @@
 
         <li class="input">
           <%= pf.label :creation_date %>
-          <%= pf.date_select :creation_date, class: "span12" %>
+          <%= pf.text_field :creation_date, class: "span3 datepicker" %>
         </li>
 
         <li class="input">
@@ -87,6 +87,8 @@
 
 <script>
   $(function(){
+    $(".datepicker").datepicker({"dateFormat": "yy-mm-dd", showButtonPanel: true});
+
     $('#technologies').tagsInput({
       'defaultText':'add a technology',
       'minChars' : 1        
