@@ -376,7 +376,7 @@
                 <br>
                 <p><%= "#{project.summary}" %></p>
                 <p>
-                  <%= link_to "Read more", user_project_path(@user, project), class: "btn btn-primary"%>
+                  <%= link_to "Read more", (project.id == 9 ? "/" : user_project_path(@user, project)), class: "btn btn-primary"%>
                   <a href="#" class="btn btn-default">Action</a>
                 </p>
               </div>
@@ -394,7 +394,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <script>
   $(function(){
