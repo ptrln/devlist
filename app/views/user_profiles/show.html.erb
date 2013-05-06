@@ -363,7 +363,12 @@
           <div class='span4'>
             <div class='box' style='padding: 20px;'>
               <div class="thumbnail">
-                <img class='img-loading' data-src='<%= project.images.empty? ? (image_path "project_placeholder.png") : project.images.first.url + filepicker_project_view(300, 200) %>' width='300px' height='200px' src='/assets/ie-spacer.gif'>
+                <%= link_to user_project_path(@user, project) do %>
+                  <img class='img-loading' 
+                    data-src='<%= project.images.empty? ? 
+                      (image_path "project_placeholder.png") : project.images.first.url + filepicker_project_view(300, 200) %>' 
+                    width='300px' height='200px' src='/assets/ie-spacer.gif'>
+                <% end %>
               </div>
               <div class="caption">
                 <h3><%= "#{project.title}" %></h3>
@@ -375,8 +380,14 @@
                 <br>
                 <p><%= "#{project.summary}" %></p>
                 <p>
-                  <%= link_to "Read more", (project.id == 9 ? "/" : user_project_path(@user, project)), class: "btn btn-primary"%>
-                  <a href="#" class="btn btn-default">Action</a>
+                  <%= link_to "Read more", user_project_path(@user, project), class: "btn btn-primary"%>
+                  
+                  <% if project.link && project.link.length > 0 %>
+                    <a href="<%= project.link %>" class="btn btn-default">Open</a>
+                  <% end %>
+                  <% if user_signed_in? && current_user == @user %>
+                    <a href="<%= edit_user_project_path(@user, project) %>" class="btn btn-default">Edit</a>
+                  <% end %>
                 </p>
               </div>
             </div>

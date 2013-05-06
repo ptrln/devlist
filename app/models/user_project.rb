@@ -21,6 +21,9 @@ class UserProject < ActiveRecord::Base
 
   validates :title, presence: true
   validates :user, presence: true
+  validates :summary, presence: true
+  VALID_URL_REGEX = /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
+  validates_format_of :link, :source_link, :with => VALID_URL_REGEX, allow_nil: true,  allow_blank: true
 
   def to_param
     if title.nil?

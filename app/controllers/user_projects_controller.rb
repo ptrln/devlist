@@ -35,6 +35,9 @@ class UserProjectsController < ApplicationController
   end
 
   def show
+    if @project.id == 9 && @project.user.screen_name == "ptrln"
+      redirect_to root_path
+    end
     @stat = google_analytics(request.fullpath)
   end
 
