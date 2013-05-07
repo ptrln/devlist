@@ -10,7 +10,7 @@ class Notification < ActiveRecord::Base
     following_user_ids = user.following_user_ids
     following_project_ids = user.following_project_ids
   
-    notify = Notification.select("*, created_at > '#{user.notification_time ? user.notification_time : 0}' AS is_unread")
+    notify = Notification.select("*, created_at > '#{user.notification_time ? user.notification_time : "2000-05-07 00:50:03"}' AS is_unread")
     user.notification_time = Time.now
     user.save
     if following_user_ids.length > 0 && following_project_ids.length > 0

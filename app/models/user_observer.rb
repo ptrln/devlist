@@ -1,7 +1,7 @@
 class UserObserver < ActiveRecord::Observer
 
   def before_save(user)
-    unless user.user_profile.changed.empty?
+    unless user.user_profile.nil? || user.user_profile.changed.empty?
       user.notifications.create(message: "#{user.screen_name} has updated their profile: #{user.user_profile.changed.join(', ')}")
     end
   #   if user.photo.changed?

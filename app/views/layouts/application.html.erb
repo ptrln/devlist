@@ -44,9 +44,89 @@
     <div class="container-fluid padded">
       <div class='row-fluid'>
         <div class='span10 offset1'>
-          <div class="container-fluid" style='min-height: 500px;'>
+          <div class="container-fluid main-container" style='min-height: 500px;'>
             <%= yield %>
           </div>
+          <% unless user_signed_in? %>
+            <div class="user-login-container row-fluid" style='display: none;'>
+              <div class="span4 offset4">
+                <div class="padded">
+                  <div class="login box" style="margin: 80px 0 120px 0;">
+
+                    <div class="box-header">
+                      <span class="title">Login</span>
+                    </div>
+
+                    <div class="box-content padded">
+                      <form class="separate-sections" action='<%= new_user_session_path %>' method='post'>
+                        <div class="input-prepend">
+                        <span class="add-on" href="#">
+                          <i class="icon-user"></i>
+                        </span>
+                          <input type="text" placeholder="screen name" name='user[screen_name]' class='login-focus'>
+                        </div>
+
+                        <div class="input-prepend">
+                        <span class="add-on" href="#">
+                          <i class="icon-key"></i>
+                        </span>
+                          <input type="password" placeholder="password" name='user[password]'>
+                        </div>
+
+                        <div style='text-align: center;'>
+                          <input name="user[remember_me]" type="hidden" value="0">
+                          <input checked="checked" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1">
+                          <label for="user_remember_me" style="display: inline;">Remember me</label>
+                        </div>
+
+                        <div>
+                          <button class="btn btn-blue btn-block" href="#">
+                            Login <i class="icon-signin"></i>
+                          </button>
+                        </div>
+
+                      </form>
+                      <br>
+                      <div>
+                        <a href="/user/register" class='top-signup-btn'>
+                          Don't have an account? <strong>Sign Up</strong>
+                        </a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="user-signup-container row-fluid" style="display: none;">
+              <div class='row-fluid'>
+                <div class="span6 offset3">
+                  <div class="padded">
+                    <div class="login box" style="margin: 80px 0 120px 0;">
+                      <div class="box-header">
+                        <span class="title">Sign Up</span>
+                      </div>
+
+                      <div class="box-content padded">
+                        <%= render :partial => "shared/signup_form" %>
+
+                        <br>
+                        <div>
+                          <a href="/user/login" class='top-login-btn'>
+                              Already have an account? <strong>Login</strong>
+                          </a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          <% end %>
 
           <div class='row-fluid'>
             <small>DevList © 2013 - English</small>
@@ -57,6 +137,20 @@
     </div>
 </body>
 <script>
+  $('.top-login-btn').on('click', function(event) {
+    event.preventDefault();
+    $(".main-container").hide();
+    $(".user-signup-container").slideUp();
+    $(".user-login-container").slideDown();
+    $(".login-focus").focus();
+  });
+  $('.top-signup-btn').on('click', function(event) {
+    event.preventDefault();
+    $(".main-container").hide();
+    $(".user-login-container").slideUp();
+    $(".user-signup-container").slideDown();
+    $(".signup-focus").focus();
+  });
   window.default_thumb = '<%= image_path "default_user_thumb.png" %>';
   <% if user_signed_in? %>
     window.current_user = { 
