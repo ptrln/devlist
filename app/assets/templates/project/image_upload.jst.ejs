@@ -1,5 +1,6 @@
 <li style='float: left;'>
-  <div class='thumbnail'>
+  <div class='img-polaroid relative'>
+    <a href='#' class="triangle-button red remove-image-btn" data-id=""><i class="icon-trash"></i></a>
     <img class='img-loading' data-src='<%= img.url %>/convert<%= key %>&w=100&h=100&fit=crop' width='100px' height='100px' src='/assets/ie-spacer.gif'>
   </div>
   <input type='hidden' name='user_project[images_attributes][<%= img.size %>][url]' 
@@ -8,4 +9,5 @@
     value='0' class='project-image-ordering'>
   <input type='hidden' name='user_project[images_attributes][<%= img.size %>][id]' 
     value='<%= img.id %>' class='upload-image-id'>
-</li>
+</li>\
+

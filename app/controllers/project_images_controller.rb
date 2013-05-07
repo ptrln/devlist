@@ -17,8 +17,12 @@ class ProjectImagesController < ApplicationController
   end
 
   def destroy
-    fail
-    #TODO
-
+    image = ProjectImage.find(params[:id])
+    if image && image.project.user == current_user
+      image.destroy
+      render :json => {status: "ok"}
+    else
+      render :json => {status: 'forbidden'}, status: 403
+    end
   end
 end

@@ -53,9 +53,12 @@
           <ul id='projectImageEditGallery' class='clearfix' style='list-style-type: none; margin: 0; padding: 0;'>
             <% count = 0 %>
             <% @project.images.each do |image| %>
-              <li style='float: left;'>
-                <div class='thumbnail'>
-                  <img src='<%= image.url %>/convert<%= filepicker_view %>&w=100&h=100&fit=crop'>
+              <li style='float: left; margin: 1px;'>
+                <div class='img-polaroid relative'>
+                  <a href='#' class="triangle-button red remove-image-btn" data-id="<%= image.id %>"><i class="icon-trash"></i></a>
+                  <img class='img-loading' src='/assets/ie-spacer.gif' 
+                    data-src='<%= image.url %>/convert<%= filepicker_view %>&w=100&h=100&fit=crop' 
+                    width='100px' height='100px'>
                 </div>
                 <input type='hidden' name='user_project[images_attributes][<%= count %>][url]' value='<%= image.url %>'>
                 <input type='hidden' name='user_project[images_attributes][<%= count %>][ordering]' value='<%= count %>' class='project-image-ordering'>
@@ -104,6 +107,21 @@
       });
      };
 
+    var bindRemoveCallback = function($buttons) {
+      $buttons.on('click', function(event) {
+        event.preventDefault();
+
+        $.ajax({
+          url: "/project/images/" + $(event.currentTarget).attr('data-id') + ".json",
+          type: "delete"
+        });
+
+        $(event.currentTarget).parent().parent().remove();  // immediately remove, hopefully ajax worked
+      });
+    };
+
+    bindRemoveCallback($(".remove-image-btn"));
+
     $("#projectImageEditGallery").sortable({
       update: refreshOrder
     });
@@ -122,6 +140,7 @@
           key: window.filepicker_view_query
         })
 
+        var $img = $(imgHTML);
         $.post(
           "/project/images.json",
           {
@@ -132,11 +151,15 @@
             }
           },
           function(response) {
-            $(imgHTML).find(".upload-image-id").val(response.id);
+            $img.find(".upload-image-id").attr("value", response.id);
+            $img.find(".remove-image-btn").attr('data-id', response.id);
+            console.log($img.find(".upload-image-id").val());
+            console.log($img.find(".remove-image-btn").attr('data-id'));
+            bindRemoveCallback($img.find(".remove-image-btn"));
           }
         );
 
-        return imgHTML;
+        return $img;
       },
       refreshOrder
     );

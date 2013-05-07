@@ -8,6 +8,7 @@ class ProjectImage < ActiveRecord::Base
   before_destroy :delete_filepicker_image
 
   validates :ordering, :url, presence: true
+  validates :url, uniqueness: true
 
   default_scope order('ordering ASC')
 
