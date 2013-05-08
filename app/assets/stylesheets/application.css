@@ -52,5 +52,7 @@
 *= require responsive768
 *= require responsive480
 *= require jquery.ui.datepicker
-*= require dashboard
+*= require codemirror
+*= require codemirror-monokai
+*= require custom
 */

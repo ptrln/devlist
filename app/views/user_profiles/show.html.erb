@@ -1,13 +1,51 @@
 <% content_for :title, @user.screen_name %>
-<h1>
+
+<style type="text/css" class='user-in-page-css'>
+</style>
+
+<div class='row-fluid'>
+
+<% if user_signed_in? && @user == current_user %>
+<div class='span4 pull-left css-editor-fixed css-editor-fixed-hidden slide-panel'>
+  <div class='row-fluid padded'>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle btn-default do-not-override" data-toggle="dropdown" href="#">
+        Templates
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <% css_template_names.each do |template| %>
+        <li>
+          <a href='#' class='css-template-li' data-template='<%= template %>'>
+            <img src='assets/ie_spacer.gif' width:'100px' height:'50px'>
+            <%= template.capitalize %>
+          </a>
+        </li>
+        <li class='divider'></li>
+        <% end %>
+      </ul>
+    </div>
+    <span style='text-align: right;'>
+      <a href='#' class='btn btn-primary css-refresh-btn do-not-override'>refresh</a>
+      <a href='#' class='btn btn-default css-save-btn do-not-override'>save</a>
+    </span>
+  </div>
+  <textarea wrap="on" id='css-editor'>
+  </textarea>
+</div>
+<% end %>
+
+<div class='span12 slide-panel profile-panel'>
+<h1 class='page-title'>
   UserProfiles#show <%= @user.screen_name %>
+  <a href='#' class='btn btn-default edit-css-btn button'>edit css</a>
 </h1>
 
 <div class="row-fluid">
   <div class="span6">
     <div class="box">
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> About</span>
+        <span class="title box-title"><i class="icon-th-list"></i> About</span>
       </div>
       <div class="box-content padded">
         <div class='row-fluid'>
@@ -27,7 +65,7 @@
           </div>
         </div>
         <legend>
-          <small>Summary</small>
+          <small class='user-summary-title'>Summary</small>
         </legend>
         <p><%= simple_format(@user.profile.summary) %></p>
 
@@ -57,7 +95,7 @@
     </div>
     <div class="box">
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Contact Information</span>
+        <span class="title box-title"><i class="icon-th-list"></i> Contact Information</span>
       </div>
       <div class="box-content padded">
         <% @user.contacts.each do |contact| %>
@@ -85,10 +123,10 @@
               <%= contact.info %> 
             </div>
             <div class='span2'>
-              <span class="badge badge-green"<i class='icon-check'></i> verified</span>
+              <span class="badge badge-green verified-badge"<i class='icon-check'></i> verified</span>
             </div>
             <div class='span2'>
-              <a href="<%= verifiedContactLink(contact).html_safe %>" class='btn btn-mini btn-default' target="_blank"><i class="icon-external-link"></i> open</a>
+              <a href="<%= verifiedContactLink(contact).html_safe %>" class='btn btn-mini btn-default button' target="_blank"><i class="icon-external-link"></i> open</a>
             </div>
           </div>
         <% end %>
@@ -97,7 +135,7 @@
     <% @user.github_panels.each do |panel| %>
     <div class='box'>
       <div class="box-header">
-        <span class="title"><i class="icon-github-alt"></i> Gibhub Panel</span>
+        <span class="title box-title"><i class="icon-github-alt"></i> Gibhub Panel</span>
       </div>
 
       <div class='box-content padded clearfix'>
@@ -106,7 +144,7 @@
             <a href='<%= panel.url.html_safe %>'><i class="icon-github icon-4x"></i></a>
           </div>
           <div class='span2'>
-            <a href='<%= panel.url.html_safe %>'><%= panel.login %></a>
+            <a class='github-login' href='<%= panel.url.html_safe %>'><%= panel.login %></a>
           </div>
           <div class='span4'>
             public repos: <%= panel.public_repos %>,<br>
@@ -120,23 +158,22 @@
         </div>
         <br>
         <div class='row-fluid'>
-          <figure style="height: 200px;" id="myChart" class='span12'></figure>
+          <figure style="height: 200px;" id="githubChart" class='span12'></figure>
           <br class='clearfix'>
           <script>
           $(function(){
             var data = {
-            "xScale": "ordinal",
-            "yScale": "exponential",
-            "main": [
-              {
-                "className": ".languages",
-                "data": <%= panel.language_count_json.html_safe %>
-              }
-            ]
-          };
-          var myChart = new xChart('bar', data, '#myChart');
-          console.log('draw chart plz')
-          })
+              "xScale": "ordinal",
+              "yScale": "exponential",
+              "main": [
+                {
+                  "className": ".languages",
+                  "data": <%= panel.language_count_json.html_safe %>
+                }
+              ]
+            };
+            new xChart('bar', data, '#githubChart');
+          });
           </script>
         </div>
         <br>
@@ -151,12 +188,12 @@
   </div>
   <div class="span6">
     <div class='row-fluid'>
-      <div class="box span6 user-stats-box">
+      <div class="box span6">
         <div class="box-header">
-          <div class="title">Statistics (last 30 days)</div>
+          <div class="title box-title">Statistics (last 30 days)</div>
         </div>
 
-        <div class="box-content padded">
+        <div class="box-content padded user-stats-box">
           <div class="row-fluid">
             <div class="span12 separate-sections" style="margin-top: 5px;">
               <div class="row-fluid">
@@ -207,12 +244,12 @@
           </div>
         </div>
       </div>
-      <div class="box span6 user-stats-box">
+      <div class="box span6">
         <div class="box-header">
-          <div class="title">Follows</div>
+          <div class="title box-title">Follows</div>
         </div>
 
-        <div class="box-content padded">
+        <div class="box-content padded user-stats-box">
           <div class="row-fluid">
             <div class="span12 separate-sections" style="margin-top: 5px;">
               <div class="row-fluid">
@@ -277,14 +314,14 @@
     <% if current_user == @user %>
     <div class="box">
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Manage</span>
+        <span class="title box-title"><i class="icon-th-list"></i> Manage</span>
       </div>
       <div class="box-content padded">
         <div class="action-nav-normal">
 
           <div class="row-fluid">
             <div class="span3 action-nav-button">
-              <a href="<%= new_user_project_path(current_user) %>" title="New Project">
+              <a class="button" href="<%= new_user_project_path(current_user) %>" title="New Project">
                 <i class="icon-file-alt"></i>
                 <span>New Project</span>
               </a>
@@ -292,7 +329,7 @@
             </div>
 
             <div class="span3 action-nav-button">
-              <a href="/messages" title="Messages">
+              <a class="button" href="/messages" title="Messages">
                 <i class="icon-comments-alt"></i>
                 <span>Messages</span>
               </a>
@@ -300,14 +337,14 @@
             </div>
 
             <div class="span3 action-nav-button">
-              <a href="/profile/edit" title="Files">
+              <a class="button" href="/profile/edit" title="Files">
                 <i class="icon-edit"></i>
                 <span>Edit Profile</span>
               </a>
             </div>
 
             <div class="span3 action-nav-button">
-              <a href="/user/edit" title="Users">
+              <a class="button" href="/user/edit" title="Users">
                 <i class="icon-user"></i>
                 <span>Account</span>
               </a>
@@ -320,7 +357,7 @@
     <% end %>
     <div class="box">
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Skills</span>
+        <span class="title box-title"><i class="icon-th-list"></i> Skills</span>
       </div>
       <div class="box-content padded">
         <ul>
@@ -343,7 +380,7 @@
   <div class="span12">
     <div class="box">
       <div class="box-header">
-        <span class="title">
+        <span class="title box-title">
           <i class="icon-th-list"></i> Projects
         </span>
         <% if signed_in? && current_user == @user %>
@@ -361,8 +398,8 @@
             <div class="row-fluid">
           <% end %>
           <div class='span4'>
-            <div class='box' style='padding: 20px;'>
-              <div class="img-polaroid">
+            <div class='box project-box' style='padding: 20px;'>
+              <div class="img-polaroid project-image">
                 <%= link_to user_project_path(@user, project) do %>
                   <img class='img-loading' 
                     data-src='<%= project.images.empty? ? 
@@ -371,22 +408,22 @@
                 <% end %>
               </div>
               <div class="caption">
-                <h3><%= "#{project.title}" %></h3>
+                <h3 class='project-title'><%= "#{project.title}" %></h3>
                 <div>
                   <% project.technologies.split(',').each do |tech |%>
-                    <span class="label label-blue"><%= tech %></span>
+                    <span class="label label-blue tech-label"><%= tech %></span>
                   <% end %>
                 </div>
                 <br>
                 <p><%= "#{project.summary}" %></p>
                 <p>
-                  <%= link_to "Read more", user_project_path(@user, project), class: "btn btn-primary"%>
+                  <%= link_to "Read more", user_project_path(@user, project), class: "btn btn-primary button"%>
                   
                   <% if project.link && project.link.length > 0 %>
-                    <a href="<%= project.link %>" class="btn btn-default">Open</a>
+                    <a href="<%= project.link %>" class="btn btn-default button">Open</a>
                   <% end %>
                   <% if user_signed_in? && current_user == @user %>
-                    <a href="<%= edit_user_project_path(@user, project) %>" class="btn btn-default">Edit</a>
+                    <a href="<%= edit_user_project_path(@user, project) %>" class="btn btn-default button">Edit</a>
                   <% end %>
                 </p>
               </div>
@@ -405,8 +442,53 @@
     </div>
   </div>
 
+</div>
+</div>
+
 <script>
-  $(function(){
+  $(function() {
+    $("#css-editor").text($(".user-in-page-css").html());
+
+    var cssEditor = CodeMirror.fromTextArea(document.getElementById("css-editor"), {
+      mode:  "css",
+      lineWrapping: true,
+      lineNumbers: true,
+      viewportMargin: Infinity,
+      tabSize: true,
+      theme: "monokai"
+    });
+
+    var refreshCSS = function(event) {
+      if (event) { event.preventDefault(); }
+      $(".user-in-page-css").html(cssEditor.getValue())
+    };
+  
+    $(".css-refresh-btn").on('click', refreshCSS);
+
+    $(".css-save-btn").on('click', function(event) {
+      event.preventDefault();
+      $(".edit-css-btn").show();
+      refreshCSS();
+      $(".css-editor-fixed").addClass("css-editor-fixed-hidden");
+      $(".profile-panel").removeClass("span9").removeClass("offset3").addClass("span12");
+    });
+
+    $(".edit-css-btn").on('click', function(event) {
+      event.preventDefault();
+      $(".edit-css-btn").hide();
+      console.log('clicked')
+      $(".css-editor-fixed").removeClass("css-editor-fixed-hidden");
+      $(".profile-panel").addClass("span9").addClass("offset3").removeClass("span12");
+    });
+
+    $(".css-template-li").on('click', function(event){
+      event.preventDefault();
+      var $el = $(event.currentTarget);
+      $.get("/css/" + $el.attr('data-template'), function(data){
+        cssEditor.setValue(data);
+      });
+    });
+    
     $('.img-loading').each(function(index, el){
       var $img = $(el);
       console.log($img);

@@ -25,6 +25,7 @@
   <% end %>
 </head>
 <body>
+  <div class='page-container' style='min-height: 100%;'>
     <%= render :partial => "layouts/top_nav_bar" %>
     <% if notice %>
     <script>
@@ -41,7 +42,7 @@
         <%= alert %>
       </div>
     <% end %>
-    <div class="container-fluid padded">
+    <div class="container-fluid padded page-container">
       <div class='row-fluid'>
         <div class='span10 offset1'>
           <div class="container-fluid main-container" style='min-height: 500px;'>
@@ -135,6 +136,7 @@
       </div>
       
     </div>
+  </div>
 </body>
 <script>
   $('.top-login-btn').on('click', function(event) {

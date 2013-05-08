@@ -52,7 +52,7 @@ notification
 -notification page for ppl without js
 message
 -message page for people without js
-better error displays.. not sure if this is even working
+#better error displays.. not sure if this is even working
 useful things on dashboard.. user stats etc
 look at tumblr templates. think about how to implement that
 hideable stats

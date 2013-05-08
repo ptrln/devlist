@@ -1,0 +1,147 @@
+.page-container {
+  background-color: #031634;
+}
+
+.box {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  border: 0px;
+} 
+
+.project-box {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  /*border: 1px solid #cdcdcd;*/
+  background-color: #CDB380;
+} 
+
+.project-title {
+  color: #031634;
+
+}
+
+.project-image {
+  padding: 0px;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.box .box-header {
+  background-color: #CDB380;
+  background-image: none;
+  -moz-border-radius-topright: 0px;
+  -webkit-border-top-right-radius: 0px;
+  border-top-right-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-top-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom: none;
+}
+
+.box .box-content {
+  background-color: #E8DDCB;
+  color: #031634;
+}
+
+.box-title {
+  text-shadow: none;
+  color: #033649;
+}
+
+.page-title {
+  color: #E8DDCB;
+}
+
+.button {
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  -ms-border-radius: 0px !important;
+  -o-border-radius: 0px !important;
+  border-radius: 0px !important;
+  border: none !important;
+  text-shadow: none;
+}
+
+.btn.btn-primary {
+  background-image: none;
+  background-color: #031634;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn.btn-default {
+  background-image: none;
+  background-color: #E8DDCB;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.dashboard-stats .glyph {
+  background-color: #033649;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  border: 1px solid #033649;
+}
+
+.progress {
+  height: 12px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.progress .bar {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: #036564;
+
+}
+
+.xchart .color0 rect {
+  fill: #036564;
+}
+
+.xchart .axis .tick {
+  stroke: white;
+  stroke-width: 1px;
+}
+
+.xchart .axis text {
+  fill: #666;
+  font-size: 12px;
+}
+
+.tech-label {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: none;
+  background-image: none;
+}
+
+.stats-label {
+ color: #CDB380;
+}

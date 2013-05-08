@@ -46,4 +46,6 @@
 //= require charts/xcharts_bar
 // require charts/sparkline_samples
 // require generic
+//= require vendor/codemirror
+//= require vendor/codemirror_css
 // require custom_actions
