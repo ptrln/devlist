@@ -48,4 +48,5 @@
 // require generic
 //= require vendor/codemirror
 //= require vendor/codemirror_css
+//= require vendor/jquery.blockUI
 // require custom_actions

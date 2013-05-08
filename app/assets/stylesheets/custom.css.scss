@@ -88,6 +88,7 @@
   margin-left: -200px;
   width: 0;
   overflow: hidden;
+  z-index: -999;
 }
 
 .slide-panel {
@@ -98,6 +99,10 @@
 }
 
 .css-template {
+  display: none;
+}
+
+.tmp-css-store {
   display: none;
 }
 

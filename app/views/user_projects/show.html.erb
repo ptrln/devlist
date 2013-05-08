@@ -5,6 +5,7 @@
     <div class='row-fluid' style='min-height: 150px;'>
       <legend>
         <h1>
+          <i class='icon-bookmark-empty icon-2x'></i>
           <%= @project.title %>
         <small>
           by <%= link_to @project.user.screen_name, user_path(@project.user) %>
@@ -33,11 +34,13 @@
       </legend> 
       <%= @project.summary %>
       <div style='height: 25px'></div>
-      <legend>
-        <small>Description</small>
-      </legend>
-      <%= simple_format(@project.description) %>
-      <div style='height: 25px'></div>
+      <% if @project.description && @project.description.length > 0 %>
+        <legend>
+          <small>Description</small>
+        </legend>
+        <%= simple_format(@project.description) %>
+        <div style='height: 25px'></div>
+      <% end %>
       <legend>
         <small>Technologies</small>
       </legend>
@@ -48,10 +51,13 @@
     </div>
     <div class='box'>
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Gallery</span>
+        <span class="title"><i class="icon-picture"></i> Gallery</span>
       </div>
       <div class="box-content padded">
         <% image_count = 0 %>
+        <% if @project.images.empty? %>
+          No images uploaded
+        <% end %>
         <% @project.images.each do |image| %>
           <% if image_count % 4 == 0 %>
             <div class="row-fluid">
@@ -76,32 +82,52 @@
     </div>
     <div class='box'>
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Updates</span>
+        <span class="title"><i class="icon-rss"></i> Updates</span>
       </div>
       <div class="box-content padded">
+        No updates
       </div>
     </div>
   </div>
   <div class='span4'>
     <div class="box">
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Followers</span>
+        <span class="title"><i class="icon-group"></i> Followers</span>
       </div>
-      <div class="box-content padded">
+      <div class="box-content padded clearfix">
+        <% if @project.followers.empty? %>
+          No followers
+        <% else %>
+          <% @project.followers.each do |follower| %>
+          <div class='pull-left' style='text-align: center; width: 70px;'>
+            <a href='<%= user_path(follower) %>'>
+            <% if follower.photo %>
+              <img class='img-loading menu-avatar' data-src='<%= follower.photo.url + filepicker_project_view(30, 30) %>' src='/assets/ie-spacer.gif'>
+            <% else %>
+              <%= image_tag "default_user_thumb.png" %> 
+            <% end %>
+            <br>
+            <%= follower.screen_name.length > 13 ?  follower.screen_name.length[0..10] + "..." : follower.screen_name %>
+            </a>
+            </div>
+          <% end %>
+        <% end %>
+        <br class='clearfix'>
       </div>
     </div>
     <div class="box">
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Q&A</span>
+        <span class="title"><i class="icon-question-sign"></i> Q&A</span>
       </div>
       <div class="box-content padded">
         <ul>
+          No questions yet...
         </ul>
       </div>
     </div>
     <div class="box">
       <div class="box-header">
-        <span class="title"><i class="icon-th-list"></i> Statistics</span>
+        <span class="title"><i class="icon-bar-chart"></i> Statistics</span>
       </div>
       <div class="box-content padded">
         <div class="row-fluid">

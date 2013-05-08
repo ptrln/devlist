@@ -1,6 +1,6 @@
 <div class="box">
   <div class="box-header">
-    <span class="title box-title"><i class="icon-th-list"></i> About</span>
+    <span class="title box-title"><i class="icon-asterisk"></i> About</span>
   </div>
   <div class="box-content padded">
     <div class='row-fluid'>
@@ -22,7 +22,13 @@
     <legend>
       <small class='user-summary-title'>Summary</small>
     </legend>
-    <p><%= simple_format(@user.profile.summary) %></p>
+    <p>
+    <% if @user.profile.summary && @user.profile.summary.length > 0 %>
+      <%= simple_format(@user.profile.summary) %>
+    <% else %>
+      Not provided
+    <% end %>
+    </p>
 
   </div>
   <% if user_signed_in? && @user != current_user %>

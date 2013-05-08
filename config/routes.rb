@@ -47,7 +47,7 @@ DevList::Application.routes.draw do
     end
   end
 
-  resources :css, :controller => "css_templates", only: [:show]
+  resources :css, :controller => "css_templates", only: [:show, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

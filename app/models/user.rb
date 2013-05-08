@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
 
   has_one :photo, :class_name => "UserPhoto", :dependent => :destroy
 
+  has_one :css, :class_name => "UserCss", :dependent => :destroy
+
   has_many :github_panels, :inverse_of => :user
 
   has_one :user_profile, :inverse_of => :user, :dependent => :destroy

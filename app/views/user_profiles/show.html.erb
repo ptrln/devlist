@@ -1,6 +1,7 @@
 <% content_for :title, @user.screen_name %>
 
 <style type="text/css" class='user-in-page-css'>
+<%= @user.css ? @user.css.css : "" %>
 </style>
 
 <div class='row-fluid'>
@@ -68,10 +69,10 @@
             </div>
             <br>
             <div class='row-fluid'>
-                <small class='pull-right'>
-                last updated: <%= time_ago_in_words(panel.created_at) + " ago" %>
-                </small>
-              </div>
+              <small class='pull-right'>
+              last updated: <%= time_ago_in_words(panel.created_at) + " ago" %>
+              </small>
+            </div>
           </div>
         </div>
         <% end %>
@@ -88,6 +89,9 @@
           </div>
           <div class="box-content padded">
             <ul>
+            <% if @user.skills.empty? %>
+              No skills
+            <% end %>
             <% @user.skills.each do |skill| %>
               <p>
                 <%= "#{skill.name}" %> (<%= skill.proficiency %>%)
@@ -127,19 +131,30 @@
       theme: "monokai"
     });
 
+    var VALID_CSS_REGEX = /^((\/\*[^\/]*\*\/)*\s*(([.#]?([a-zA-Z_0-9-]+|>) *)+\{\s*(((([a-zA-Z-])+\ *\:[^;]+;)|(\/\*[^\/]*\*\/))*\s*)*\})+\s*)*\s*$/;
+
     var refreshCSS = function(event) {
       if (event) { event.preventDefault(); }
-      $(".user-in-page-css").html(cssEditor.getValue())
+      if (VALID_CSS_REGEX.test(cssEditor.getValue()))
+        $(".user-in-page-css").html(cssEditor.getValue());
+      else
+        alert('invalid css');
     };
   
     $(".css-refresh-btn").on('click', refreshCSS);
 
     $(".css-save-btn").on('click', function(event) {
       event.preventDefault();
-      $(".edit-css-btn").show();
-      refreshCSS();
-      $(".css-editor-fixed").addClass("css-editor-fixed-hidden");
-      $(".profile-panel").removeClass("span9").removeClass("offset3").addClass("span12");
+      $(".css-editor-fixed").block({ message: '<i class="icon-spinner icon-spin"></i> One moment...' }); 
+      if (VALID_CSS_REGEX.test(cssEditor.getValue())) {
+        $.post("/css.json", {css: cssEditor.getValue()}, function() {
+          $(".css-editor-fixed").unblock();
+          refreshCSS();
+          $(".edit-css-btn").show();
+          $(".css-editor-fixed").addClass("css-editor-fixed-hidden");
+          $(".profile-panel").removeClass("span9").removeClass("offset3").addClass("span12");
+        });
+      }
     });
 
     $(".css-cancel-btn").on('click', function(event) {
@@ -161,9 +176,12 @@
 
     $(".css-template-li").on('click', function(event){
       event.preventDefault();
+      $(".css-editor-fixed").block({ message: '<i class="icon-spinner icon-spin"></i> One moment...' }); 
       var $el = $(event.currentTarget);
       $.get("/css/" + $el.attr('data-template'), function(data){
+        $(".css-editor-fixed").unblock();
         cssEditor.setValue(data);
+        refreshCSS();
       });
     });
 
