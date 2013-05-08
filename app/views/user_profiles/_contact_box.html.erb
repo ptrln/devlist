@@ -1,0 +1,39 @@
+<div class="box">
+  <div class="box-header">
+    <span class="title box-title"><i class="icon-th-list"></i> Contact Information</span>
+  </div>
+  <div class="box-content padded">
+    <% @user.contacts.each do |contact| %>
+      <div class='row-fluid'>
+        <div class='span1'>
+        </div>
+        <div class='span2'>
+          <%= contact.t %>
+        </div>
+        <div class='span9'>
+          <%= contact.info %>
+        </div>
+      </div>
+    <% end %>
+    <% @user.verified_contacts.each do |contact| %>
+      <div class='row-fluid'>
+        
+        <div class='span1' style='text-align:center;'>
+          <%= verifiedContactIcon(contact.t).html_safe %>
+        </div>
+        <div class='span2'>
+          <%= contact.t %>
+        </div>
+        <div class='span5'>
+          <%= contact.info %> 
+        </div>
+        <div class='span2'>
+          <span class="badge badge-green verified-badge"<i class='icon-check'></i> verified</span>
+        </div>
+        <div class='span2'>
+          <a href="<%= verifiedContactLink(contact).html_safe %>" class='btn btn-mini btn-default button' target="_blank"><i class="icon-external-link"></i> open</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

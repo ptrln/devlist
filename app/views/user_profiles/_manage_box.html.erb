@@ -1,0 +1,42 @@
+<div class="box">
+  <div class="box-header">
+    <span class="title box-title"><i class="icon-th-list"></i> Manage</span>
+  </div>
+  <div class="box-content padded">
+    <div class="action-nav-normal">
+
+      <div class="row-fluid">
+        <div class="span3 action-nav-button">
+          <a class="button" href="<%= new_user_project_path(current_user) %>" title="New Project">
+            <i class="icon-file-alt"></i>
+            <span>New Project</span>
+          </a>
+          <span class="triangle-button red"><i class="icon-plus"></i></span>
+        </div>
+
+        <div class="span3 action-nav-button">
+          <a class="button" href="/messages" title="Messages">
+            <i class="icon-comments-alt"></i>
+            <span>Messages</span>
+          </a>
+          <span class="label label-black unread-message-counter"><%= num_unread_messages %></span>
+        </div>
+
+        <div class="span3 action-nav-button">
+          <a class="button" href="/profile/edit" title="Files">
+            <i class="icon-edit"></i>
+            <span>Edit Profile</span>
+          </a>
+        </div>
+
+        <div class="span3 action-nav-button">
+          <a class="button" href="/user/edit" title="Users">
+            <i class="icon-user"></i>
+            <span>Account</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

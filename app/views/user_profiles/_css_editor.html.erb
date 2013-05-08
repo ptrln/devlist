@@ -1,0 +1,28 @@
+<div class='span4 pull-left css-editor-fixed css-editor-fixed-hidden slide-panel'>
+  <div class='row-fluid padded'>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle btn-default do-not-override" data-toggle="dropdown" href="#">
+        Templates
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <% css_template_names.each do |template| %>
+        <li>
+          <a href='#' class='css-template-li' data-template='<%= template %>'>
+            <img src='assets/ie_spacer.gif' width:'100px' height:'50px'>
+            <%= template.capitalize %>
+          </a>
+        </li>
+        <li class='divider'></li>
+        <% end %>
+      </ul>
+    </div>
+    <span style='text-align: right;'>
+      <a href='#' class='btn btn-primary css-refresh-btn do-not-override'>refresh</a>
+      <a href='#' class='btn btn-default css-save-btn do-not-override'>save</a>
+      <a href='#' class='btn btn-default css-cancel-btn do-not-override'>cancel</a>
+    </span>
+  </div>
+  <textarea wrap="on" id='css-editor'>
+  </textarea>
+</div>

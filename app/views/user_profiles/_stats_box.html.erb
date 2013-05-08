@@ -1,0 +1,119 @@
+<div class='row-fluid'>
+  <div class="box span6">
+    <div class="box-header">
+      <div class="title box-title">Statistics (last 30 days)</div>
+    </div>
+
+    <div class="box-content padded user-stats-box">
+      <div class="row-fluid">
+        <div class="span12 separate-sections" style="margin-top: 5px;">
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="dashboard-stats">
+                <ul class="inline">
+                  <li class="glyph"><i class="icon-bolt icon-2x"></i></li>
+                  <li class="count">
+                    <%= @stat.nil? ? "N/A" : @stat.visitors %>
+                  </li>
+                </ul>
+                <!-- <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
+                <div class="stats-label">Total Visits</div>
+              </div>
+            </div>
+            <br>
+            <div class="row-fluid" style="margin-top:50px;">
+            <div class="span6">
+              <div class="dashboard-stats small">
+                <ul class="inline">
+                  <li class="glyph"><i class="icon-user"></i></li>
+                  <li class="count"><%= @stat.nil? ? "N/A" : @stat.new_visits %></li>
+                </ul>
+                <!-- <div class="progress progress-blue"><div class="bar tip" title="65%" data-percent="65"></div></div> -->
+                <div class="stats-label">New Visitors</div>
+              </div>
+            </div>
+
+            <div class="span6">
+              <div class="dashboard-stats small">
+                <ul class="inline">
+                  <li class="glyph"><i class="icon-eye-open"></i></li>
+                  <li class="count"><%= @stat.nil? ? "N/A" : @stat.pageviews %></li>
+                </ul>
+              <!--   <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
+                <div class="stats-label">Page Views</div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+      <div class='row-fluid'>
+        <small class='pull-right'>
+        last updated: <%= @stat.nil? ? "N/A" : time_ago_in_words(@stat.updated_at) + " ago" %>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="box span6">
+    <div class="box-header">
+      <div class="title box-title">Follows</div>
+    </div>
+
+    <div class="box-content padded user-stats-box">
+      <div class="row-fluid">
+        <div class="span12 separate-sections" style="margin-top: 5px;">
+          <div class="row-fluid">
+            <div class="row-fluid">
+              <div class="span6">
+                <div class="dashboard-stats small">
+                  <ul class="inline">
+                    <li class="glyph"><i class="icon-user"></i></li>
+                    <li class="count"><%= @user.followers.count %></li>
+                  </ul>
+                  <!-- <div class="progress progress-blue"><div class="bar tip" title="65%" data-percent="65"></div></div> -->
+                  <div class="stats-label">Followers</div>
+                </div>
+              </div>
+
+              <div class="span6">
+                <div class="dashboard-stats small">
+                  <ul class="inline">
+                    <li class="glyph"><i class="icon-eye-open"></i></li>
+                    <li class="count"><%= @user.projects.inject(0) { |c, p| c + p.followers.count } %></li>
+                  </ul>
+                <!--   <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
+                  <div class="stats-label">Project Followers</div>
+                </div>
+              </div>
+            </div>
+            <div class="row-fluid" style="margin-top:20px;">
+              <div class="span6">
+                <div class="dashboard-stats small">
+                  <ul class="inline">
+                    <li class="glyph"><i class="icon-user"></i></li>
+                    <li class="count"><%= @user.following_users.count %></li>
+                  </ul>
+                  <!-- <div class="progress progress-blue"><div class="bar tip" title="65%" data-percent="65"></div></div> -->
+                  <div class="stats-label">Following</div>
+                </div>
+              </div>
+
+              <div class="span6">
+                <div class="dashboard-stats small">
+                  <ul class="inline">
+                    <li class="glyph"><i class="icon-eye-open"></i></li>
+                    <li class="count"><%= @user.following_projects.count %></li>
+                  </ul>
+                <!--   <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
+                  <div class="stats-label">Project Following</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>    
+</div>
