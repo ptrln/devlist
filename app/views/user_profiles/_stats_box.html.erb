@@ -67,46 +67,98 @@
             <div class="row-fluid">
               <div class="span6">
                 <div class="dashboard-stats small">
-                  <ul class="inline">
-                    <li class="glyph"><i class="icon-user"></i></li>
-                    <li class="count"><%= @user.followers.count %></li>
-                  </ul>
-                  <!-- <div class="progress progress-blue"><div class="bar tip" title="65%" data-percent="65"></div></div> -->
-                  <div class="stats-label">Followers</div>
+                  <a href='#follower-modal' class='modal-toggle' data-toggle="modal" data-remote='<%= followers_user_path(@user) %> .body-for-modal'>
+                    <ul class="inline">
+                      <li class="glyph"><i class="icon-user"></i></li>
+                      <li class="count"><%= @user.followers.count %></li>
+                    </ul>
+                    <!-- <div class="progress progress-blue"><div class="bar tip" title="65%" data-percent="65"></div></div> -->
+                    <div class="stats-label">Followers</div>
+                  </a>
+                  <div id='follower-modal' class="modal hide fade">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h3><i class='icon-group'></i> Followers</h3>
+                    </div>
+                    <div class="modal-body">
+                      <div style='text-align: center;'>
+                        <p><i class='icon-spinner icon-spin'></i> one moment...</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="span6">
                 <div class="dashboard-stats small">
-                  <ul class="inline">
-                    <li class="glyph"><i class="icon-eye-open"></i></li>
-                    <li class="count"><%= @user.projects.inject(0) { |c, p| c + p.followers.count } %></li>
-                  </ul>
+                  <a href='#project-follower-modal' class='modal-toggle' data-toggle="modal" data-remote='<%= project_followers_user_path(@user) %> .body-for-modal'>
+                    <ul class="inline">
+                      <li class="glyph"><i class="icon-eye-open"></i></li>
+                      <li class="count"><%= @user.projects.inject(0) { |c, p| c + p.followers.count } %></li>
+                    </ul>
+                  </a>
                 <!--   <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
                   <div class="stats-label">Project Followers</div>
+                  <div id='project-follower-modal' class="modal hide fade">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h3><i class='icon-bookmark-empty'></i> Project Followers</h3>
+                    </div>
+                    <div class="modal-body">
+                      <div style='text-align: center;'>
+                        <p><i class='icon-spinner icon-spin'></i> one moment...</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="row-fluid" style="margin-top:20px;">
               <div class="span6">
                 <div class="dashboard-stats small">
-                  <ul class="inline">
-                    <li class="glyph"><i class="icon-user"></i></li>
-                    <li class="count"><%= @user.following_users.count %></li>
-                  </ul>
+                  <a href='#following-modal' class='modal-toggle' data-toggle="modal" data-remote='<%= following_user_path(@user) %> .body-for-modal'>
+                    <ul class="inline">
+                      <li class="glyph"><i class="icon-user"></i></li>
+                      <li class="count"><%= @user.following_users.count %></li>
+                    </ul>
+                  </a>
                   <!-- <div class="progress progress-blue"><div class="bar tip" title="65%" data-percent="65"></div></div> -->
                   <div class="stats-label">Following</div>
+                  <div id='following-modal' class="modal hide fade">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h3><i class='icon-group'></i> Following</h3>
+                    </div>
+                    <div class="modal-body">
+                      <div style='text-align: center;'>
+                        <p><i class='icon-spinner icon-spin'></i> one moment...</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="span6">
                 <div class="dashboard-stats small">
-                  <ul class="inline">
-                    <li class="glyph"><i class="icon-eye-open"></i></li>
-                    <li class="count"><%= @user.following_projects.count %></li>
-                  </ul>
+                  <a href='#project-following-modal' class='modal-toggle' data-toggle="modal" data-remote='<%= project_following_user_path(@user) %> .body-for-modal'>
+                    <ul class="inline">
+                      <li class="glyph"><i class="icon-eye-open"></i></li>
+                      <li class="count"><%= @user.following_projects.count %></li>
+                    </ul>
+                  </a>
                 <!--   <div class="progress progress-blue"><div class="bar tip" title="80%" data-percent="80"></div></div> -->
                   <div class="stats-label">Project Following</div>
+                  <div id='project-following-modal' class="modal hide fade">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h3><i class='icon-bookmark-empty'></i> Project Following</h3>
+                    </div>
+                    <div class="modal-body">
+                      <div style='text-align: center;'>
+                        <p><i class='icon-spinner icon-spin'></i> one moment...</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -117,3 +169,12 @@
     </div>
   </div>    
 </div>
+
+<script>
+  // $(function(){
+  //   $('.modal-toggle').on('click', function(event){
+  //     event.preventDefault();
+  //     $("#" + $(event.currentTarget).attr("data-modal")).modal('toggle');
+  //   });
+  // });
+</script>

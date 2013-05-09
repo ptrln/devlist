@@ -6,7 +6,14 @@
     <div class='row-fluid'>
       <div class='span9'>
         <p><%= @user.profile.name %></p>
-        <p><%= @user.email %></p>
+        <p>
+          <%= @user.email %>
+          <% if @user.confirmed_at %>
+            <span class="badge badge-green verified-badge">
+              <i class='icon-check'></i> verified
+            </span>
+          <% end %>
+        </p>
         <p><i><%= @user.profile.headline %></i></p>
       </div>
       <div class='span3'>

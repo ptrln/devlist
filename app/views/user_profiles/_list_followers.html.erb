@@ -1,0 +1,13 @@
+<% followers.each do |follower| %>
+<div class='pull-left' style='text-align: center; width: 120px;'>
+  <a href='<%= user_path(follower) %>'>
+  <% if follower.photo %>
+    <img class='img-loading menu-avatar' data-src='<%= follower.photo.url + filepicker_project_view(30, 30) %>' src='/assets/ie-spacer.gif'>
+  <% else %>
+    <%= image_tag "default_user_thumb.png" %> 
+  <% end %>
+  <br>
+  <%= follower.screen_name.length > 13 ?  follower.screen_name.length[0..10] + "..." : follower.screen_name %>
+  </a>
+</div>
+<% end %>

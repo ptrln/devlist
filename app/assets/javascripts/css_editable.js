@@ -33,6 +33,7 @@ var css_editable = function() {
         $(".edit-css-btn").show();
         $(".css-editor-fixed").addClass("css-editor-fixed-hidden");
         $(".profile-panel").removeClass("span9").removeClass("offset3").addClass("span12");
+        $(document).trigger('resize');
       });
     }
   });
@@ -43,6 +44,7 @@ var css_editable = function() {
     $(".edit-css-btn").show();
     $(".css-editor-fixed").addClass("css-editor-fixed-hidden");
     $(".profile-panel").removeClass("span9").removeClass("offset3").addClass("span12");
+    $(document).trigger('resize');
   });
 
   $(".edit-css-btn").on('click', function(event) {
@@ -52,6 +54,7 @@ var css_editable = function() {
     cssEditor.setValue($(".user-in-page-css").html());
     $(".css-editor-fixed").removeClass("css-editor-fixed-hidden");
     $(".profile-panel").addClass("span9").addClass("offset3").removeClass("span12");
+    $(document).trigger('resize');
   });
 
   $(".css-template-li").on('click', function(event){

@@ -44,6 +44,10 @@ DevList::Application.routes.draw do
     member do
       get 'follow'
       get 'unfollow'
+      get 'followers'
+      get 'project_followers'
+      get 'following'
+      get 'project_following'
     end
   end
 

@@ -91,6 +91,15 @@
   color: #eaeaea;
 }
 
+.btn.language-btn {
+  background-image: none;
+  background-color: #eaeaea;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  color: #eaeaea;
+}
+
 .dashboard-stats .glyph {
   background-color: #eaeaea;
   -webkit-border-radius: 0px;

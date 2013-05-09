@@ -117,8 +117,17 @@
 
 <div class='tmp-css-store'></div>
 
+
 <script>
+
   $(function() {
+
+    $('#projects-container').isotope({
+      // options
+      itemSelector : '.project',
+      layoutMode : 'fitRows'
+    });
+
     <% if user_signed_in? && @user == current_user %>
       css_editable();
     <% end %>

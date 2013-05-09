@@ -11,20 +11,63 @@
     </ul>
     <% end %>
   </div>
-  <div class="box-content padded">
+  <div class='box-content padded'>
+  <div class='row-fluid'>
+    <div class='span9' style='text-align: center;'>
+    <% (@user.projects.map { |p| p.technologies.split(',') }).flatten.uniq.each do |lang| %>
+      <a href='#' data-language='.<%= lang.downcase.gsub('.', '_') %>' 
+        class='btn btn-gray language-btn button'>
+        <%= lang %>
+      </a>
+    <% end %>
+      <a href='#' data-language='' class='btn btn-blue language-btn button'>Show All</a>
+
+    </div>
+      <div class="btn-group span3">
+        <a class="btn dropdown-toggle btn-default span11" data-toggle="dropdown" href="#">
+          <span class='project-sorted-selected'>Sort</span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class='project-sort-option' data-sort='created_at' data-ascending='true'>
+            <a href='#'>Newest to Oldest</a>
+          </li>
+          <li class='project-sort-option' data-sort='created_at' data-ascending='false'>
+            <a href='#'>Oldest to Newest</a>
+          </li>
+          <li class='project-sort-option' data-sort='updated_at' data-ascending='true'>
+            <a href='#'>Most Recenly Updated</a>
+          </li>
+          <li class='project-sort-option' data-sort='updated_at' data-ascending='false'>
+            <a href='#'>Least Recently Updated</a>
+          </li>
+          <li class='project-sort-option' data-sort='random' data-ascending="true">
+            <a href='#'>Random</a>
+          </li>
+          <li class='project-sort-option' data-sort='followers' data-ascending='false'>
+            <a href='#'>Most Follows</a>
+          </li>
+          <li class='project-sort-option' data-sort='followers' data-ascending='true'>
+            <a href='#'>Least Follows</a>
+          </li>
+        </ul>
+      </div>
+
+  </div>
+  <div class="row-fluid" id='projects-container' style='height: 100%;'>
     <% project_count = 0 %>
     <% if @user.projects.empty? %>
       No projects yet...
-
     <% end %>
-
 
     <% @user.projects.each do |project| %>
-    <% if project_count % 3 == 0 %>
-    <div class="row-fluid">
-    <% end %>
-      <div class='span4'>
-        <div class='box project-box' style='padding: 20px;'>
+    <%# if project_count % 3 == 0 %>
+    <!-- <div class="row-fluid"> -->
+    <%# end %>
+      <div class='project span4 clearfix <%= project.technologies.gsub('.', '_').split(',').map(&:downcase).join(' ') %>' style='margin-left: 1%; padding: 5px; min-width: 250px;'>
+        <span style='display: none;' class='created_at'><%= project.created_at %></span>
+        <span style='display: none;' class='updated_at'><%= project.updated_at %></span>
+        <div class='box project-box clearfix' style='padding: 20px;'>
           <div class="img-polaroid project-image">
             <%= link_to user_project_path(@user, project) do %>
             <img class='img-loading' 
@@ -33,7 +76,7 @@
             width='300px' height='200px' src='/assets/ie-spacer.gif'>
             <% end %>
           </div>
-          <div class="caption">
+          <div class="caption clearfix">
             <h3 class='project-title'><%= "#{project.title}" %></h3>
             <div>
               <% project.technologies.split(',').each do |tech |%>
@@ -55,13 +98,51 @@
           </div>
         </div>
       </div>
-    <% if project_count % 3 == 2 %>
-    </div>
+    <%# if project_count % 3 == 2 %>
+    <!-- </div> -->
+    <%# end %>
+    <%# project_count += 1 %>
     <% end %>
-    <% project_count += 1 %>
-    <% end %>
-    <% if project_count % 3 != 0 %>
-    </div>
-    <% end %>
+    <%# if project_count % 3 != 0 %>
+    <!-- </div> -->
+    <%# end %>
+  </div>
+  <span class='clearfix'></span>
   </div>
 </div>
+
+<script>
+
+  $(function(){
+
+    $("#projects-container").isotope({
+        itemSelector : '.project',
+        layoutMode : 'fitRows'
+      });
+
+    $(".project-sort-option").on('click', function(event){
+      event.preventDefault();
+
+      $(".project-sorted-selected").html("Sort (" + $(event.target).html() + ")");
+
+      $('#projects-container').isotope({
+        sortBy : $(event.currentTarget).attr("data-sort"),
+        sortAscending : $(event.currentTarget).attr("data-ascending") === 'true'
+      });
+    });
+
+    $(".language-btn").on('click', function(event){
+      event.preventDefault();
+
+      if ($(event.target).hasClass('btn-blue')) { return; }
+      $(".language-btn.btn-blue").removeClass('btn-blue').addClass('btn-gray');
+      $(event.target).removeClass('btn-gray').addClass('btn-blue');
+
+      $("#projects-container").isotope({filter: $(event.target).attr('data-language') });
+    });
+
+    
+
+    $(document).trigger('resize');
+  });
+</script>

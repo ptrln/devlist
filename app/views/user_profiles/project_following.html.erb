@@ -1,0 +1,15 @@
+<div class='body-for-modal'>
+  <% if @user.following_projects.empty? %>
+    Not following any projects
+  <% else %>
+    <ul>
+    <% @user.following_projects.each do |project| %>
+      <li>
+        <%= link_to project.title, user_project_path(project.user, project) %>
+        by
+        <%= link_to project.user.screen_name, user_path(project.user) %>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>  
+</div>

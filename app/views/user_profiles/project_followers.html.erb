@@ -1,0 +1,15 @@
+<div class='body-for-modal'>
+  <% followers = false %>
+  <% @user.projects.each do |project| %>
+    <% unless project.followers.empty? %>
+      <legend><%= link_to project.title, user_project_path(@user, project) %> <small>(<%= project.followers.length %>)</small></legend>
+      <div>
+        <%= render :partial => "list_followers", locals: {followers: project.followers.sample(12)} %>
+        <% followers = true %>
+      </div>
+    <% end %>
+  <% end %>
+  <% unless followers %>
+    No project followers
+  <% end %>
+</div>

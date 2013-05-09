@@ -1,6 +1,7 @@
 class UserProfilesController < ApplicationController
   include FollowableHelper
-  before_filter :authenticate_user!, except: [:show]
+  before_filter :authenticate_user!, except: 
+    [:show, :followers, :project_followers, :following, :project_following]
 
   def show
     @user = User.find_by_screen_name(params[:id]) || user_not_found
@@ -50,4 +51,21 @@ class UserProfilesController < ApplicationController
       format.json { render :json => {status: "ok"} }
     end
   end
+
+  def followers
+    @user = User.find_by_screen_name(params[:id]) || user_not_found
+  end
+
+  def project_followers
+    @user = User.find_by_screen_name(params[:id]) || user_not_found
+  end
+
+  def following
+    @user = User.find_by_screen_name(params[:id]) || user_not_found
+  end
+
+  def project_following
+    @user = User.find_by_screen_name(params[:id]) || user_not_found
+  end
+
 end

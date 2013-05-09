@@ -49,5 +49,6 @@
 //= require vendor/codemirror
 //= require vendor/codemirror_css
 //= require vendor/jquery.blockUI
+//= require vendor/jquery.isotope
 //= require css_editable
 // require custom_actions

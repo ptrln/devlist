@@ -1,0 +1,6 @@
+<div class='body-for-modal'>
+  <% if @user.followers.empty? %>
+    No followers
+  <% end %>
+  <%= render :partial => "list_followers", locals: {followers: @user.followers} %>
+</div>
