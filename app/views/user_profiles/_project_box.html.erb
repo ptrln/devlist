@@ -15,7 +15,7 @@
   <div class='row-fluid'>
     <div class='span9' style='text-align: center;'>
     <% (@user.projects.map { |p| p.technologies.split(',') }).flatten.uniq.each do |lang| %>
-      <a href='#' data-language='.<%= lang.downcase.gsub('.', '_') %>' 
+      <a href='#' data-language='.<%= lang.downcase.gsub(/[\W]/, '_') %>' 
         class='btn btn-gray language-btn button'>
         <%= lang %>
       </a>
@@ -64,7 +64,7 @@
     <%# if project_count % 3 == 0 %>
     <!-- <div class="row-fluid"> -->
     <%# end %>
-      <div class='project span4 clearfix <%= project.technologies.gsub('.', '_').split(',').map(&:downcase).join(' ') %>' style='margin-left: 1%; padding: 5px; min-width: 250px;'>
+      <div class='project span4 clearfix <%= project.technologies.downcase.gsub(/[^,\w]/,'_').split(',').join(' ') %>' style='margin-left: 1%; padding: 5px; min-width: 250px;'>
         <span style='display: none;' class='created_at'><%= project.created_at %></span>
         <span style='display: none;' class='updated_at'><%= project.updated_at %></span>
         <div class='box project-box clearfix' style='padding: 20px;'>
