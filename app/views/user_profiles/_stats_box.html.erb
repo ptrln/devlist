@@ -171,10 +171,18 @@
 </div>
 
 <script>
-  // $(function(){
-  //   $('.modal-toggle').on('click', function(event){
-  //     event.preventDefault();
-  //     $("#" + $(event.currentTarget).attr("data-modal")).modal('toggle');
-  //   });
-  // });
+  $(function(){
+    $(".modal").on('shown', function(){
+      console.log('shown');
+      $('.img-loading').each(function(index, el){
+        var $img = $(el);
+        var img = new Image();
+        img.onload = function() {
+          $img.removeClass('img-loading');
+          $img.attr('src', img.src);
+        };
+        img.src = $img.attr('data-src');
+      });
+    });
+  });
 </script>
