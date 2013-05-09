@@ -80,7 +80,11 @@
             <h3 class='project-title'><%= "#{project.title}" %></h3>
             <div>
               <% project.technologies.split(',').each do |tech |%>
-              <span class="label label-blue tech-label"><%= tech %></span>
+              <a class="label label-blue tech-label language-btn"
+                data-language='.<%= tech.downcase.gsub(/[\W]/, '_') %>'
+              >
+                <%= tech %>
+              </a>
               <% end %>
             </div>
             <br>
@@ -136,7 +140,11 @@
 
       if ($(event.target).hasClass('btn-blue')) { return; }
       $(".language-btn.btn-blue").removeClass('btn-blue').addClass('btn-gray');
-      $(event.target).removeClass('btn-gray').addClass('btn-blue');
+      if ($(event.target).hasClass('button')) { 
+        $(event.target).removeClass('btn-gray').addClass('btn-blue');
+      } else {
+        $(".language-btn.button[data-language='" + $(event.target).attr('data-language') + "']").removeClass('btn-gray').addClass('btn-blue');
+      }
 
       $("#projects-container").isotope({filter: $(event.target).attr('data-language') });
     });
