@@ -14,6 +14,7 @@
     <% end %>
   </div>
   <div class='box-content padded'>
+  <% unless @user.projects.empty? %>
   <div class='row-fluid'>
     <div class='span9' style='text-align: center;'>
     <% (@user.projects.map { |p| p.technologies.split(',') }).flatten.uniq.each do |lang| %>
@@ -63,8 +64,8 @@
           </li>
         </ul>
       </div>
-
   </div>
+  <% end %>
   <div class="row-fluid" id='projects-container' style='height: 100%;'>
     <% project_count = 0 %>
     <% if @user.projects.empty? %>
@@ -145,6 +146,7 @@
   </div>
 </div>
 
+<% unless @user.projects.empty? %>
 <script>
   $(function(){
     project_box_on_load(
@@ -154,3 +156,4 @@
     );
   });
 </script>
+<% end %>
