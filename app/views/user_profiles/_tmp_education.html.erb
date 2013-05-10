@@ -1,0 +1,50 @@
+<h3> Education</h3>
+    <ul class="padded separate-sections">
+      <%= f.fields_for(:educations) do |sf| %>
+        <div class='container-fluid box-section'>
+          <li class='input'>
+            <div class="row-fluid">
+              <div class="span3">
+                <%= sf.label :degree %>
+              </div>
+              <div class="span9">
+                <%= sf.text_field :degree %>
+              </div>
+            </div>
+            <div class='row-fluid'>
+
+              <div class="span3">
+                <%= sf.label :school %>
+              </div>
+              <div class="span9">
+                <%= sf.text_field :school %>
+              </div>
+            </div>
+            <div class='row-fluid'>
+              <div class="span3">
+                <%= sf.label :result %>
+              </div>
+              <div class="span9">
+                <%= sf.text_field :result %>
+              </div>
+            </div>
+            <div class='row-fluid'>
+              <div class="span3">
+                <%= sf.label :graduate_date, "Graduation Date" %>
+              </div>
+              <div class="span9">
+                <%= sf.text_field :graduate_date %>
+              </div>
+            </div>
+            <div class='row-fluid'>
+              <div class="span1">
+                <% if sf.object.persisted? %>
+                  <%= sf.check_box :_destroy %>
+                  <%= sf.label :_destroy, "Delete" %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        </div>
+      <% end %>
+    </ul>

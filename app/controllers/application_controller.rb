@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
     sign_in_url = url_for(:action => 'new', :controller => 'sessions', :only_path => false, :protocol => 'http')
     if resource.user_profile.nil?
       edit_profile_path
+    elsif resource.class == User
+      user_path(resource)
     elsif request.referer == sign_in_url
       super
     else
