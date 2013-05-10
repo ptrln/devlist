@@ -19,6 +19,7 @@ class UserProfilesController < ApplicationController
     3.times { @user.projects.build }
     3.times { @user.skills.build }
     3.times { @user.contacts.build }
+    @user.educations.build
     store_image_auth
   end
 

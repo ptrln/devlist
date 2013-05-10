@@ -14,6 +14,19 @@
   padding: 5px 50px 10px;
 }
 
+.carousel-inner {
+  height: 80%;
+}
+
+.carousel-inner .item {
+  height: 100%;
+}
+
+.carousel-caption h1 {
+  margin: 0 0 5px;
+  color: white;
+}
+
 .navbar.navbar-top {
   position: fixed;
   top: 0;

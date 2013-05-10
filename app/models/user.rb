@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
                   :user_profile_attributes, 
                   :skills_attributes, 
                   :contacts_attributes,
+                  :educations_attributes,
                   :follower_ids,
                   :following_user_ids,
                   :following_project_ids,
@@ -35,6 +36,9 @@ class User < ActiveRecord::Base
 
   has_many :projects, :class_name => "UserProject", :inverse_of => :user, :dependent => :destroy
   #accepts_nested_attributes_for :projects, :reject_if => :all_blank
+
+  has_many :educations, :class_name => "UserEducation", :inverse_of => :user, :dependent => :destroy
+  accepts_nested_attributes_for :educations, :reject_if => :all_blank, :allow_destroy => true
 
   has_many :skills, :class_name => "UserSkill", :inverse_of => :user, :dependent => :destroy
   accepts_nested_attributes_for :skills, :allow_destroy => true, :reject_if => :all_blank
