@@ -55,10 +55,10 @@ var profile_form_load = function(screen_name, policy, signature) {
     signature,
     false,
     function(img) {
-      var imgHTML = JST["user/photo_upload"]({
+      var $imgHTML = $(JST["user/photo_upload"]({
         img: img,
         key: window.filepicker_view_query
-      });
+      }));
 
       $.post(
         "/user/photo.json",
@@ -68,11 +68,11 @@ var profile_form_load = function(screen_name, policy, signature) {
           }
         },
         function(response) {
-          $(imgHTML).find(".upload-image-id").val(response.id);
+          $imgHTML.find(".upload-image-id").val(response.id);
         }
       );
 
-      return imgHTML;
+      return $imgHTML;
     }
   );
 

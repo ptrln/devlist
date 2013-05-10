@@ -30,7 +30,7 @@ window.FilepickerImageUpload = {
           $dropPane.text("Done! " + fpfiles.length + " " + i + " uploaded.");
           var existingCount = $imgGallery.children().length;
           _(fpfiles).each(function(img){
-            $newImg = renderImage(img, existingCount);
+            var $newImg = renderImage(img, existingCount);
             existingCount++;
             if (multi)
               $imgGallery.append($newImg);
