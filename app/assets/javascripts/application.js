@@ -53,4 +53,5 @@
 //= require css_editable
 //= require new_project_form_load
 //= require project_box_load
+//= require profile_form_load
 // require custom_actions
