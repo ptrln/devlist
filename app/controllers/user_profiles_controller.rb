@@ -6,6 +6,8 @@ class UserProfilesController < ApplicationController
   def show
     @user = User.find_by_screen_name(params[:id]) || user_not_found
     @stat = google_analytics(request.fullpath)
+    
+    store_image_auth if user_signed_in? && current_user == @user
   end
 
   def edit

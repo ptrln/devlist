@@ -51,4 +51,5 @@
 //= require vendor/jquery.blockUI
 //= require vendor/jquery.isotope
 //= require css_editable
+//= require new_project_form_load
 // require custom_actions

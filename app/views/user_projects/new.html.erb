@@ -8,10 +8,20 @@
         <span class="title">New Project</span>
       </div>
 
-      <div class="box-content">
+      <div class="box-content body-for-modal">
         <%= render :partial => "form" %>
       </div>
     </div>
 
   </div>
 </div>
+
+<script>
+  $(function(){
+    new_project_form_load(
+      null, 
+      '<%= @policy %>', 
+      '<%= @signature %>'
+    );
+  });
+</script>

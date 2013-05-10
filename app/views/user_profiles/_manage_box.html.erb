@@ -7,7 +7,8 @@
 
       <div class="row-fluid">
         <div class="span3 action-nav-button">
-          <a class="button" href="<%= new_user_project_path(current_user) %>" title="New Project">
+          <!-- the edit project modal is in _project_box.html.erb --> 
+          <a href='#edit-project-modal' class='modal-toggle' data-toggle="modal" data-remote='<%= new_user_project_path(current_user)%> .body-for-modal'>
             <i class="icon-file-alt"></i>
             <span>New Project</span>
           </a>

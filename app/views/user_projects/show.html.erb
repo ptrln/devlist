@@ -34,6 +34,23 @@
       </legend> 
       <%= @project.summary %>
       <div style='height: 25px'></div>
+      <ul>
+        <li>Added to DevList <%= time_ago_in_words(@project.created_at) %> ago</li>
+        <li>Last Updated <%= time_ago_in_words(@project.updated_at) %> ago</li>
+        <% if @project.creation_date %>
+          <li>Created <%= time_ago_in_words(@project.creation_date) %> ago</li>
+        <% end %>
+
+        <% if @project.link && @project.link.length > 0 %>
+          <li>Link: <%= link_to @project.link, @project.link %></li>
+        <% end %>
+
+        <% if @project.source_link && @project.source_link.length > 0 %>
+          <li>Source: <%= link_to @project.source_link, @project.source_link %></li>
+        <% end %>
+        
+      </ul>
+      <div style='height: 25px'></div>
       <% if @project.description && @project.description.length > 0 %>
         <legend>
           <small>Description</small>
