@@ -1,6 +1,6 @@
 <%= form_for(@user, :url => profile_path, :html => { class: "fill-up" }) do |f| %>
 <%= render :partial => "shared/error_messages", locals: { form: f } %>
-<div class="row-fluid">
+<div class="row-fluid padded">
   <div class="span6">
     <h3> About</h3>
     <ul class="padded separate-sections">
