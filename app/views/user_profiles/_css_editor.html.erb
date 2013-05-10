@@ -9,7 +9,7 @@
         <% css_template_names.each do |template| %>
         <li>
           <a href='#' class='css-template-li' data-template='<%= template %>'>
-            <img src='assets/ie_spacer.gif' width:'100px' height:'50px'>
+            <img src='<%= image_path "ie-spacer.gif" %>' width:'100px' height:'50px'>
             <%= template.capitalize %>
           </a>
         </li>
