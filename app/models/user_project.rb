@@ -19,7 +19,7 @@ class UserProject < ActiveRecord::Base
   has_many :follows, :as => :followable
   has_many :followers, :through => :follows
 
-  default_scope order('creation_date DESC, created_at DESC')
+  default_scope order('creation_date DESC, user_projects.created_at DESC')
 
   validates :title, presence: true
   validates :user, presence: true
