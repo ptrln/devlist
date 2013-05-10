@@ -3,9 +3,10 @@ class CreateUserEducations < ActiveRecord::Migration
     create_table :user_educations do |t|
       t.string :school, null: false
       t.string :degree, null: false
-      t.string :gpa, null: false
+      t.string :result, null: false
       t.text :description, null: false
       t.integer :user_id, null: false
+      t.date :graduate_date, null: false
 
       t.timestamps
     end

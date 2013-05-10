@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508182657) do
+ActiveRecord::Schema.define(:version => 20130510162257) do
 
   create_table "analyticals", :force => true do |t|
     t.string   "page_path",        :null => false
@@ -165,6 +165,19 @@ ActiveRecord::Schema.define(:version => 20130508182657) do
   end
 
   add_index "user_csses", ["user_id"], :name => "index_user_csses_on_user_id", :unique => true
+
+  create_table "user_educations", :force => true do |t|
+    t.string   "school",        :null => false
+    t.string   "degree",        :null => false
+    t.string   "result",        :null => false
+    t.text     "description",   :null => false
+    t.integer  "user_id",       :null => false
+    t.date     "graduate_date", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "user_educations", ["user_id"], :name => "index_user_educations_on_user_id"
 
   create_table "user_photos", :force => true do |t|
     t.string   "url",        :null => false
