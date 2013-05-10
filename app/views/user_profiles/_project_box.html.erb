@@ -66,11 +66,12 @@
       </div>
   </div>
   <% end %>
+  <% if @user.projects.empty? %>
+    No projects yet...
+  <% end %>
   <div class="row-fluid" id='projects-container' style='height: 100%;'>
     <% project_count = 0 %>
-    <% if @user.projects.empty? %>
-      No projects yet...
-    <% end %>
+    
 
     <% @user.projects.each do |project| %>
     <%# if project_count % 3 == 0 %>
